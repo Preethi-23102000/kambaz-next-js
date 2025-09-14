@@ -334,10 +334,6 @@ export default function Lab1() {
         to visit my github repository, &quot;kambaz-next-j&quot; for Web Dev
         class Fall 25.
       </div>
-
-      <div id="wd-my-details">
-        <h2> Name : Preethi Rajesh Yennemadi</h2>
-      </div>
     </div>
   );
 }
