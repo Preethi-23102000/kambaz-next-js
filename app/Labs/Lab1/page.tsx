@@ -79,7 +79,7 @@ export default function Lab1() {
         <ul id="wd-my-books">
           <li>Dune</li>
           <li>Lord of the Rings</li>
-          <li>Ender's Game</li>
+          <li>Ender&apos;s Game</li>
           <li>Red Mars</li>
           <li>The Forever War</li>
         </ul>
@@ -332,8 +332,8 @@ export default function Lab1() {
         >
           click here
         </Link>{" "}
-        to visit my github repository, "kambaz-next-j" for Web Dev class Fall
-        25.
+        to visit my github repository, &quot;kambaz-next-j&quot; for Web Dev
+        class Fall 25.
       </div>
     </div>
   );
