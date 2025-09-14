@@ -279,13 +279,11 @@ export default function Lab1() {
           <br />
           <select multiple id="wd-select-many-genre">
             <option value="COMEDY" selected>
-              {" "}
-              Comedy{" "}
+              Comedy
             </option>
             <option value="DRAMA"> Drama </option>
             <option value="SCIFI" selected>
-              {" "}
-              Science Fiction{" "}
+              Science Fiction
             </option>
             <option value="FANTASY"> Fantasy </option>
           </select>
@@ -325,15 +323,20 @@ export default function Lab1() {
         Please <Link href="https://www.lipsum.com/">click here</Link> to get
         dummy text.
         <h4>Anchor Tag - My Github repository</h4>
-        Please{" "}
+        Please
         <Link
           href="https://github.com/Preethi-23102000/kambaz-next-js"
           target="_blank"
+          id="wd-github"
         >
           click here
-        </Link>{" "}
+        </Link>
         to visit my github repository, &quot;kambaz-next-j&quot; for Web Dev
         class Fall 25.
+      </div>
+
+      <div id="wd-my-details">
+        <h2> Name : Preethi Rajesh Yennemadi</h2>
       </div>
     </div>
   );
