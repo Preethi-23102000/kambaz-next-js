@@ -19,7 +19,6 @@ export default function Lab1() {
         h3, h4, h5, and h6. Tag h1 is the largest heading and h6 is the smallest
         heading.
       </div>
-
       <div id="wd-p-tag">
         <h4>Paragraph Tag</h4>
         <p id="wd-p-1">
@@ -47,7 +46,6 @@ export default function Lab1() {
           tag to tell browsers to render the gaps.
         </p>
       </div>
-
       <div id="wd-lists">
         <h4>List Tags</h4>
         <h5>Ordered List Tag</h5>
@@ -93,7 +91,6 @@ export default function Lab1() {
           <li>Harry Potter Series</li>
         </ul>
       </div>
-
       <div id="wd-tables">
         <h4>Table Tag</h4>
         <table border={1} width="100%">
@@ -175,7 +172,6 @@ export default function Lab1() {
           </tfoot>
         </table>
       </div>
-
       <div id="wd-images">
         <h4>Image tag</h4>
         Loading an image from the internet: <br />
@@ -189,7 +185,6 @@ export default function Lab1() {
         <br />
         <img id="wd-teslabot" src="/images/teslabot.jpg" height="200px" />
       </div>
-
       <div id="wd-forms">
         <h4>Form Elements</h4>
         <form id="wd-text-fields">
@@ -322,6 +317,22 @@ export default function Lab1() {
           <input type="date" value="2000-01-21" id="wd-text-fields-dob" />
           <br />
         </form>
+      </div>
+
+      <div id="wd-anchor-tag">
+        <h4>Anchor Tag</h4>
+        Please <a href="https://www.lipsum.com/">click here</a> to get dummy
+        text.
+        <h4>Anchor Tag - My Github repository</h4>
+        Please{" "}
+        <a
+          href="https://github.com/Preethi-23102000/kambaz-next-js"
+          target="_blank"
+        >
+          click here
+        </a>{" "}
+        to visit my github repository, "kambaz-next-j" for Web Dev class Fall
+        25.
       </div>
     </div>
   );
