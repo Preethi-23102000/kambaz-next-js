@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 export default function Lab1() {
   return (
@@ -321,16 +322,16 @@ export default function Lab1() {
 
       <div id="wd-anchor-tag">
         <h4>Anchor Tag</h4>
-        Please <a href="https://www.lipsum.com/">click here</a> to get dummy
-        text.
+        Please <Link href="https://www.lipsum.com/">click here</Link> to get
+        dummy text.
         <h4>Anchor Tag - My Github repository</h4>
         Please{" "}
-        <a
+        <Link
           href="https://github.com/Preethi-23102000/kambaz-next-js"
           target="_blank"
         >
           click here
-        </a>{" "}
+        </Link>{" "}
         to visit my github repository, "kambaz-next-j" for Web Dev class Fall
         25.
       </div>
