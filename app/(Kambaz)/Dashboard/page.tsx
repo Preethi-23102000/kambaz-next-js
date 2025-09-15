@@ -25,7 +25,7 @@ export default function Dashboard() {
         </div>
 
         <div className="wd-dashboard-course">
-          <Link href="/Courses/CS1234" className="wd-dashboard-course-link">
+          <Link href="/Courses/CS1235" className="wd-dashboard-course-link">
             <Image
               src="/images/java.png"
               width={200}

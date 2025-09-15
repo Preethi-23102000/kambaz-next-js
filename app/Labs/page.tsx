@@ -4,14 +4,7 @@ export default function Labs() {
   return (
     <div>
       <h1>Labs</h1>
-      <h2> Name : Preethi Rajesh Yennemadi</h2>
-      <Link
-        href="https://github.com/Preethi-23102000/kambaz-next-js"
-        target="_blank"
-        id="wd-github"
-      >
-        My Github Repository
-      </Link>
+      <h3> Name : Preethi Rajesh Yennemadi</h3>
       <ul>
         <li>
           <Link href="/Labs/Lab1" id="wd-lab1-link">

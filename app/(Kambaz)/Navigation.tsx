@@ -35,6 +35,13 @@ export default function KambazNavigation() {
         Labs
       </Link>
       <br />
+      <Link
+        href="https://github.com/Preethi-23102000/kambaz-next-js"
+        target="_blank"
+        id="wd-github"
+      >
+        Github
+      </Link>
     </div>
   );
 }
