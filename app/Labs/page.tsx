@@ -4,9 +4,24 @@ export default function Labs() {
   return (
     <div id="wd-labs">
       <h1>Labs</h1>
-      <h3> Name : Preethi Rajesh Yennemadi</h3>
-      <h3> Section : 4 </h3>
-      <h3> Classroom : Churchill Hall 101 on Mondays @ 6:00 - 9:20pm EST </h3>
+      <div id="wd-my-details">
+        <b>Name : Preethi Rajesh Yennemadi</b>
+        <br />
+        <b>Section : 4</b>
+        <br />
+        <b>Classroom : Churchill Hall 101 on Mondays @ 6:00 - 9:20pm EST</b>
+        <br />
+        <b>
+          <Link
+            href="https://github.com/Preethi-23102000/kambaz-next-js"
+            target="_blank"
+            id="wd-github"
+          >
+            My Github Repository
+          </Link>
+        </b>
+        <br />
+      </div>
       <ul>
         <li>
           <Link href="/Labs/Lab1" id="wd-lab1-link">
