@@ -4,7 +4,7 @@ export default function Dashboard() {
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
-      <h2 id="wd-dashboard-published">Published Courses (12)</h2> <hr />
+      <h2 id="wd-dashboard-published">Published Courses (8)</h2> <hr />
       <div id="wd-dashboard-courses">
         <div className="wd-dashboard-course">
           <Link href="/Courses/CS1234" className="wd-dashboard-course-link">
@@ -41,7 +41,7 @@ export default function Dashboard() {
         </div>
 
         <div className="wd-dashboard-course">
-          <Link href="/Courses/CS1234" className="wd-dashboard-course-link">
+          <Link href="/Courses/CS1236" className="wd-dashboard-course-link">
             <Image
               src="/images/ai.png"
               width={200}
@@ -59,7 +59,7 @@ export default function Dashboard() {
         </div>
 
         <div className="wd-dashboard-course">
-          <Link href="/Courses/CS1234" className="wd-dashboard-course-link">
+          <Link href="/Courses/CS1237" className="wd-dashboard-course-link">
             <Image
               src="/images/algo.jpeg"
               width={200}
@@ -75,7 +75,7 @@ export default function Dashboard() {
         </div>
 
         <div className="wd-dashboard-course">
-          <Link href="/Courses/CS1234" className="wd-dashboard-course-link">
+          <Link href="/Courses/CS1238" className="wd-dashboard-course-link">
             <Image
               src="/images/c.jpeg"
               width={200}
@@ -91,7 +91,7 @@ export default function Dashboard() {
         </div>
 
         <div className="wd-dashboard-course">
-          <Link href="/Courses/CS1234" className="wd-dashboard-course-link">
+          <Link href="/Courses/CS1239" className="wd-dashboard-course-link">
             <Image
               src="/images/dbms.png"
               width={200}
@@ -109,7 +109,7 @@ export default function Dashboard() {
         </div>
 
         <div className="wd-dashboard-course">
-          <Link href="/Courses/CS1234" className="wd-dashboard-course-link">
+          <Link href="/Courses/CS1240" className="wd-dashboard-course-link">
             <Image
               src="/images/ml.jpg"
               width={200}
@@ -125,7 +125,7 @@ export default function Dashboard() {
         </div>
 
         <div className="wd-dashboard-course">
-          <Link href="/Courses/CS1234" className="wd-dashboard-course-link">
+          <Link href="/Courses/CS1241" className="wd-dashboard-course-link">
             <Image
               src="/images/python.png"
               width={200}
