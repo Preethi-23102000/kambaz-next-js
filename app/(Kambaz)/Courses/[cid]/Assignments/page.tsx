@@ -4,9 +4,9 @@ export default function Assignments() {
   return (
     <div id="wd-assignments">
       <input placeholder="Search for Assignments" id="wd-search-assignment" />
-      @nbsp;
-      <button id="wd-add-assignment-group">+ Group</button> @nbsp;
-      <button id="wd-add-assignment">+ Assignment</button> @nbsp;
+      &nbsp;
+      <button id="wd-add-assignment-group">+ Group</button> &nbsp;
+      <button id="wd-add-assignment">+ Assignment</button> &nbsp;
       <h3 id="wd-assignments-title">
         ASSIGNMENTS 40% of Total <button>+</button>
       </h3>
