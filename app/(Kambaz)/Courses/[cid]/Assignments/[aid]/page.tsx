@@ -1,9 +1,9 @@
 export default function AssignmentEditor() {
   return (
     <div id="wd-assignments-editor">
-      <label htmlFor="wd-name">Assignment Name</label>
-      <br />
-      <br />
+      <label htmlFor="wd-name">
+        <h3>Assignment Name</h3>
+      </label>
       <input id="wd-name" value="A1 - ENV + HTML" />
       <br />
       <br />
@@ -33,10 +33,10 @@ export default function AssignmentEditor() {
           </td>
           <td>
             <select id="wd-group">
-              <option selected>Assignments</option>
-              <option>Quizzes</option>
-              <option>Exams</option>
-              <option>Projects</option>
+              <option selected>ASSIGNMENTS</option>
+              <option>QUIZZES</option>
+              <option>EXAMS</option>
+              <option>PROJECTS</option>
             </select>
           </td>
         </tr>
