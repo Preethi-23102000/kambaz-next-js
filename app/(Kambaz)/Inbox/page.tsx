@@ -1,3 +1,7 @@
 export default function InboxPlaceholder() {
-  return <div>Inbox Placeholder</div>;
+  return (
+    <div id="wd-inbox">
+      <h2>Inbox</h2>
+    </div>
+  );
 }

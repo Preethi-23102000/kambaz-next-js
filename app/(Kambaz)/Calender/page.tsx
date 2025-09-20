@@ -1,3 +1,7 @@
 export default function CalenderPlaceholder() {
-  return <div>Calender Placeholder</div>;
+  return (
+    <div id="wd-calender-screen">
+      <h2>Calender</h2>
+    </div>
+  );
 }

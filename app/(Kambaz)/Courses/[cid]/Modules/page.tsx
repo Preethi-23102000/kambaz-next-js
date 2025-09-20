@@ -2,7 +2,7 @@
 
 export default function Modules() {
   return (
-    <div>
+    <div id="wd-modules">
       <button>Collapse All</button>
       <button>View Progress</button>
 
@@ -17,7 +17,7 @@ export default function Modules() {
 
       <ul id="wd-modules">
         <li className="wd-module">
-          <div className="wd-title">Week 1</div>
+          <div className="wd-title">Week 1 - Intro to Web Dev</div>
           <ul className="wd-lessons">
             <li className="wd-lesson">
               <span className="wd-title">LEARNING OBJECTIVES</span>
@@ -56,7 +56,7 @@ export default function Modules() {
           </ul>
         </li>
         <li className="wd-module">
-          <div className="wd-title">Week 2</div>
+          <div className="wd-title">Week 2 - HTML Basics</div>
           <ul className="wd-lessons">
             <li className="wd-lesson">
               <span className="wd-title">LEARNING OBJECTIVES</span>
@@ -65,7 +65,7 @@ export default function Modules() {
                   Learn how to create user interface with HTML
                 </li>
                 <li className="wd-content-item">
-                  Deploy the assignment to NEtify.
+                  Deploy the assignment to Netify.
                 </li>
               </ul>
             </li>
@@ -86,7 +86,34 @@ export default function Modules() {
           </ul>
         </li>
         <li className="wd-module">
-          <div className="wd-title">Week 3</div>
+          <div className="wd-title">Week 3 - CSS and JavaScript</div>
+          <ul className="wd-lessons">
+            <li className="wd-lesson">
+              <span className="wd-title">LEARNING OBJECTIVES</span>
+              <ul className="wd-content">
+                <li className="wd-content-item">
+                  Learn how to Styling User Interfaces with CSS
+                </li>
+                <li className="wd-content-item">
+                  Programming User Interfaces with JavaScript
+                </li>
+              </ul>
+            </li>
+            <li className="wd-lesson">
+              <span className="wd-title">SLIDES</span>
+              <ul className="wd-content">
+                <li className="wd-content-item">
+                  Styling User Interfaces with CSS.
+                </li>
+                <li className="wd-content-item">
+                  Implementing Responsive User Interfaces
+                </li>
+                <li className="wd-content-item">
+                  Programming User Interfaces with JavaScript .
+                </li>
+              </ul>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>

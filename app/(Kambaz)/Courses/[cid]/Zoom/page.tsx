@@ -1,7 +1,12 @@
 export default function Zoom() {
   return (
     <div id="wd-zoom">
-      <h1 id="wd-zoom-title">Zoom Placeholder</h1>
+      <iframe
+        src="https://zoom.us"
+        height="600px"
+        width="100%"
+        title="Zoom"
+      ></iframe>
     </div>
   );
 }
