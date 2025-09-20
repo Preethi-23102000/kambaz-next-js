@@ -4,8 +4,9 @@ export default function Assignments() {
   return (
     <div id="wd-assignments">
       <input placeholder="Search for Assignments" id="wd-search-assignment" />
-      <button id="wd-add-assignment-group">+ Group</button>
-      <button id="wd-add-assignment">+ Assignment</button>
+      @nbsp;
+      <button id="wd-add-assignment-group">+ Group</button> @nbsp;
+      <button id="wd-add-assignment">+ Assignment</button> @nbsp;
       <h3 id="wd-assignments-title">
         ASSIGNMENTS 40% of Total <button>+</button>
       </h3>
@@ -44,9 +45,7 @@ export default function Assignments() {
           <b>Due </b> May 27 at 11.59 pm | 100 pts
         </li>
       </ul>
-
       <br />
-
       <h3 id="wd-quizzes-title">
         Quizzes 10% of Total <button>+</button>
       </h3>
@@ -64,9 +63,7 @@ export default function Assignments() {
           <b>Due </b> May 21 at 11.59 pm | 100 pts
         </li>
       </ul>
-
       <br />
-
       <h3 id="wd-project-title">
         Project 20% of Total <button>+</button>
       </h3>
@@ -77,9 +74,7 @@ export default function Assignments() {
           Multiple Modules| <b>Due </b> July 14 at 11.59 pm | 100 pts
         </li>
       </ul>
-
       <br />
-
       <h3 id="wd-exam-title">
         Exam 30% of Total <button>+</button>
       </h3>
