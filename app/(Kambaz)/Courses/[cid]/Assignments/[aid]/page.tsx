@@ -131,7 +131,6 @@ export default function AssignmentEditor() {
           </td>
         </tr>
       </table>
-      <hr />
     </div>
   );
 }
