@@ -15,7 +15,7 @@ export default function Modules() {
 
       <ul id="wd-modules">
         <li className="wd-module">
-          <div className="wd-title">Week 1 - Intro to Web Dev</div>
+          <div className="wd-title">Week 1, Lecture 1 - Intro to Web Dev</div>
           <ul className="wd-lessons">
             <li className="wd-lesson">
               <span className="wd-title">LEARNING OBJECTIVES</span>
@@ -54,7 +54,7 @@ export default function Modules() {
           </ul>
         </li>
         <li className="wd-module">
-          <div className="wd-title">Week 2 - HTML Basics</div>
+          <div className="wd-title">Week 1, Lecture 2 - HTML Basics</div>
           <ul className="wd-lessons">
             <li className="wd-lesson">
               <span className="wd-title">LEARNING OBJECTIVES</span>
@@ -84,7 +84,7 @@ export default function Modules() {
           </ul>
         </li>
         <li className="wd-module">
-          <div className="wd-title">Week 3 - CSS and JavaScript</div>
+          <div className="wd-title">Week 2, Lecture 1 - CSS and JavaScript</div>
           <ul className="wd-lessons">
             <li className="wd-lesson">
               <span className="wd-title">LEARNING OBJECTIVES</span>
@@ -108,6 +108,37 @@ export default function Modules() {
                 </li>
                 <li className="wd-content-item">
                   Programming User Interfaces with JavaScript .
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li className="wd-module">
+          <div className="wd-title">Week 2, Lecture 2 - Redux & State</div>
+          <ul className="wd-lessons">
+            <li className="wd-lesson">
+              <span className="wd-title">LEARNING OBJECTIVES</span>
+              <ul className="wd-content">
+                <li className="wd-content-item">
+                  learn about Strings, arrays, objects, functions, React
+                  components
+                </li>
+                <li className="wd-content-item">
+                  Dynamic content, router navigation
+                </li>
+                <li className="wd-content-item">
+                  Maintaining User Interface State, Hooks
+                </li>
+              </ul>
+            </li>
+            <li className="wd-lesson">
+              <span className="wd-title">SLIDES</span>
+              <ul className="wd-content">
+                <li className="wd-content-item">
+                  Redux State, Reducers, Working with Forms
+                </li>
+                <li className="wd-content-item">
+                  Application vs Component State
                 </li>
               </ul>
             </li>
