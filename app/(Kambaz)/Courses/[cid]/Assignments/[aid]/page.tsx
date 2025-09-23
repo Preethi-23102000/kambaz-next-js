@@ -83,13 +83,29 @@ export default function AssignmentEditor() {
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td colSpan={3}></td>
+          </tr>
+          <tr>
+            <td colSpan={3}></td>
+          </tr>
+          <tr>
+            <td align="right">
+              <label htmlFor="wd-assign-to"> Assign </label>
+            </td>
             <td>
               <label htmlFor="wd-assign-to"> Assign to</label>
-              &nbsp;
+            </td>
+          </tr>
+          <tr>
+            <td> </td>
+            <td>
               <input type="text" placeholder="Everyone" id="wd-assign-to" />
               <br />
-              <br />
+            </td>
+          </tr>
+          <tr>
+            <td> </td>
+            <td>
               <label htmlFor="wd-due-date">Due</label>
               <br />
               <input type="date" id="wd-due-date" defaultValue="2024-05-13" />
@@ -129,7 +145,7 @@ export default function AssignmentEditor() {
           <tr>
             <td colSpan={2}></td>
             <td>
-              <button id="wd-cancel-assignment">Cancel</button>
+              <button id="wd-cancel-assignment">Cancel</button> &nbsp;
               <button id="wd-save-assignment">Save</button>
             </td>
           </tr>
