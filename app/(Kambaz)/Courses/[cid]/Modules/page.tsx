@@ -6,10 +6,8 @@ export default function Modules() {
       <button>Collapse All</button>
       <button>View Progress</button>
 
-      <select id="wd-select-one">
-        <option selected value="PublishAll">
-          Publish All
-        </option>
+      <select id="wd-select-one" defaultValue={"PublishAll"}>
+        <option value="PublishAll">Publish All</option>
         <option value="UnPublishAll">UnPublish All</option>
       </select>
 
