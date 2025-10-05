@@ -1,3 +1,4 @@
+import { Table, Container } from "react-bootstrap";
 export default function Grades() {
   return (
     <div id="wd-grades">
@@ -29,72 +30,81 @@ export default function Grades() {
       <button id="wd-download-grades-button">Download Grades</button>
       <br />
       <br />
-      <table id="wd-grades-table" border={1} cellPadding={5} cellSpacing={0}>
-        <thead>
-          <tr>
-            <th>Student</th>
-            <th>Assignment-1</th>
-            <th>Assignment-2</th>
-            <th>Assignment-3</th>
-            <th>Assignment-4</th>
-            <th>Assignment-5</th>
-            <th>Assignment-6</th>
-            <th>Assignment-7</th>
-            <th>Assignment-8</th>
-            <th>Assignment-9</th>
-            <th>Assignment-10</th>
-            <th>Total</th>
-            <th>Grade</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>John doe</td>
-            <td>85</td>
-            <td>90</td>
-            <td>78</td>
-            <td>88</td>
-            <td>92</td>
-            <td>80</td>
-            <td>87</td>
-            <td>91</td>
-            <td>84</td>
-            <td>89</td>
-            <td>864</td>
-            <td>A</td>
-          </tr>
-          <tr>
-            <td>Preethi Y</td>
-            <td>85</td>
-            <td>90</td>
-            <td>78</td>
-            <td>88</td>
-            <td>92</td>
-            <td>80</td>
-            <td>87</td>
-            <td>88</td>
-            <td>92</td>
-            <td>80</td>
-            <td>860</td>
-            <td>A</td>
-          </tr>
-          <tr>
-            <td>Swathi B</td>
-            <td>87</td>
-            <td>73</td>
-            <td>79</td>
-            <td>89</td>
-            <td>78</td>
-            <td>100</td>
-            <td>76</td>
-            <td>73</td>
-            <td>97</td>
-            <td>70</td>
-            <td>822</td>
-            <td>A-</td>
-          </tr>
-        </tbody>
-      </table>
+      <Container className="float-start">
+        <Table
+          id="wd-grades-table"
+          border={1}
+          cellPadding={5}
+          cellSpacing={0}
+          className="text-nowrap"
+          responsive
+        >
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Assignment-1</th>
+              <th>Assignment-2</th>
+              <th>Assignment-3</th>
+              <th>Assignment-4</th>
+              <th>Assignment-5</th>
+              <th>Assignment-6</th>
+              <th>Assignment-7</th>
+              <th>Assignment-8</th>
+              <th>Assignment-9</th>
+              <th>Assignment-10</th>
+              <th>Total</th>
+              <th>Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John doe</td>
+              <td>85</td>
+              <td>90</td>
+              <td>78</td>
+              <td>88</td>
+              <td>92</td>
+              <td>80</td>
+              <td>87</td>
+              <td>91</td>
+              <td>84</td>
+              <td>89</td>
+              <td>864</td>
+              <td>A</td>
+            </tr>
+            <tr>
+              <td>Preethi Y</td>
+              <td>85</td>
+              <td>90</td>
+              <td>78</td>
+              <td>88</td>
+              <td>92</td>
+              <td>80</td>
+              <td>87</td>
+              <td>88</td>
+              <td>92</td>
+              <td>80</td>
+              <td>860</td>
+              <td>A</td>
+            </tr>
+            <tr>
+              <td>Swathi B</td>
+              <td>87</td>
+              <td>73</td>
+              <td>79</td>
+              <td>89</td>
+              <td>78</td>
+              <td>100</td>
+              <td>76</td>
+              <td>73</td>
+              <td>97</td>
+              <td>70</td>
+              <td>822</td>
+              <td>A-</td>
+            </tr>
+          </tbody>
+        </Table>
+      </Container>
     </div>
   );
 }

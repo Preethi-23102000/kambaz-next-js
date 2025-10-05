@@ -1,47 +1,107 @@
 import Link from "next/link";
+import { AiOutlineDashboard } from "react-icons/ai";
+import { IoCalendarOutline } from "react-icons/io5";
+import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
+import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
+import { ListGroup, ListGroupItem } from "react-bootstrap";
+import { GoBeaker } from "react-icons/go";
+import { FaGithub } from "react-icons/fa";
 
 export default function KambazNavigation() {
   return (
-    <div id="wd-kambaz-navigation">
-      <Link
+    <ListGroup
+      className="rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2"
+      style={{ width: 120 }}
+      id="wd-kambaz-navigation"
+    >
+      <ListGroupItem
+        className="bg-black border-0 text-center"
+        as="a"
+        target="_blank"
         href="https://www.northeastern.edu/"
         id="wd-neu-link"
-        target="_blank"
       >
-        Northeastern
-      </Link>
-      <br />
-      <Link href="/Account" id="wd-account-link">
-        Account
-      </Link>
-      <br />
-      <Link href="/Dashboard" id="wd-dashboard-link">
-        Dashboard
-      </Link>
-      <br />
-      <Link href="/Dashboard" id="wd-courses-link">
-        Courses
-      </Link>
-      <br />
-      <Link href="/Calender" id="wd-calender-link">
-        Calender
-      </Link>
-      <br />
-      <Link href="/Inbox" id="wd-inbox-link">
-        Inbox
-      </Link>
-      <br />
-      <Link href="/Labs" id="wd-labs-link">
-        Labs
-      </Link>
-      <br />
-      <Link
-        href="https://github.com/Preethi-23102000/kambaz-next-js"
-        target="_blank"
-        id="wd-github"
-      >
-        Github
-      </Link>
-    </div>
+        <img src="/images/NEU.png" width="75px" alt="Northeastern University" />
+      </ListGroupItem>
+
+      <ListGroupItem className="border-0 bg-black text-center">
+        <Link
+          href="/Account"
+          id="wd-account-link"
+          className="text-white text-decoration-none"
+        >
+          <FaRegCircleUser className="fs-1 text-white m-1" />
+          Account
+        </Link>
+      </ListGroupItem>
+
+      <ListGroupItem className="border-0 bg-white text-center">
+        <Link
+          href="/Dashboard"
+          id="wd-dashboard-link"
+          className="text-danger text-decoration-none"
+        >
+          <AiOutlineDashboard className="fs-1 text-danger m-1" />
+          Dashboard
+        </Link>
+      </ListGroupItem>
+
+      <ListGroupItem className="border-0  bg-black text-center">
+        <Link
+          href="/Dashboard"
+          id="wd-courses-link"
+          className="text-danger text-decoration-none"
+        >
+          <LiaBookSolid className="fs-1 text-danger m-1" />
+          Courses
+        </Link>
+      </ListGroupItem>
+
+      <ListGroupItem className="border-0 bg-black text-center">
+        <Link
+          href="/Calender"
+          id="wd-calender-link"
+          className="text-danger text-decoration-none m-1"
+        >
+          <IoCalendarOutline className="fs-1 text-danger" />
+          Calender
+        </Link>
+      </ListGroupItem>
+
+      <ListGroupItem className="border-0 bg-black text-center">
+        <Link
+          href="/Inbox"
+          id="wd-inbox-link"
+          className="text-danger text-decoration-none"
+        >
+          <FaInbox className="fs-1 text-danger m-1 ms-2" />
+          Inbox
+        </Link>
+      </ListGroupItem>
+
+      <ListGroupItem className="border-0 bg-black text-center">
+        <Link
+          href="/Labs"
+          id="wd-labs-link"
+          className="text-danger text-decoration-none"
+        >
+          <GoBeaker className="fs-1 text-danger m-1 " />
+          <br />
+          Labs
+        </Link>
+      </ListGroupItem>
+
+      <ListGroupItem className="border-0 bg-black text-center">
+        <Link
+          href="https://github.com/Preethi-23102000/kambaz-next-js"
+          id="wd-github"
+          className="text-danger text-decoration-none"
+        >
+          <FaGithub className="fs-1 text-danger m-1" />
+          <br />
+          My Github
+        </Link>
+      </ListGroupItem>
+    </ListGroup>
   );
 }
