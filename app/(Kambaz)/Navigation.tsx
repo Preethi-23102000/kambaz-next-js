@@ -10,7 +10,7 @@ import { FaGithub } from "react-icons/fa";
 export default function KambazNavigation() {
   return (
     <ListGroup
-      className="rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2"
+      className="rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2 d-flex flex-column align-item-center justify-content-start"
       style={{ width: 120 }}
       id="wd-kambaz-navigation"
     >
@@ -74,8 +74,10 @@ export default function KambazNavigation() {
           id="wd-inbox-link"
           className="text-danger text-decoration-none"
         >
-          <FaInbox className="fs-1 text-danger m-1 ms-2" />
-          Inbox
+          <div className="nav-icons">
+            <FaInbox className="fs-1 text-danger" />
+            Inbox
+          </div>
         </Link>
       </ListGroupItem>
 
@@ -85,21 +87,23 @@ export default function KambazNavigation() {
           id="wd-labs-link"
           className="text-danger text-decoration-none"
         >
-          <GoBeaker className="fs-1 text-danger m-1 " />
-          <br />
-          Labs
+          <div className="nav-icons">
+            <GoBeaker className="fs-1 text-danger" />
+            Labs
+          </div>
         </Link>
       </ListGroupItem>
 
-      <ListGroupItem className="border-0 bg-black text-center">
+      <ListGroupItem className="border-0 bg-black text-center ">
         <Link
           href="https://github.com/Preethi-23102000/kambaz-next-js"
           id="wd-github"
           className="text-danger text-decoration-none"
         >
-          <FaGithub className="fs-1 text-danger m-1" />
-          <br />
-          My Github
+          <div className="nav-icons">
+            <FaGithub className="fs-1 text-danger " />
+            My Github
+          </div>
         </Link>
       </ListGroupItem>
     </ListGroup>

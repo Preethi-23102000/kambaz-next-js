@@ -191,3 +191,9 @@ body * {
   border-collapse: collapse;
   table-layout: auto;
 }
+
+.nav-icons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
