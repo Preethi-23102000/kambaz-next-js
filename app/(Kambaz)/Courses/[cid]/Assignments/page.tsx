@@ -31,7 +31,7 @@ export default function Assignments() {
                 className="wd-assignment-link"
               >
                 <Row>
-                  <Col xs={2} md={1} className=" text-nowrap">
+                  <Col xs={2} md={1} className=" text-nowrap me-2">
                     <BsGripVertical className="me-2 fs-3 align-center" />
                     <MdEditNote className="me-2 fs-3 align-center font-green" />
                   </Col>
@@ -62,7 +62,7 @@ export default function Assignments() {
                 className="wd-assignment-link"
               >
                 <Row>
-                  <Col xs={2} md={1} className=" text-nowrap">
+                  <Col xs={2} md={1} className=" text-nowrap m-2">
                     <BsGripVertical className="me-2 fs-3 align-center" />
                     <MdEditNote className="me-2 fs-3 align-center font-green" />
                   </Col>
@@ -94,7 +94,7 @@ export default function Assignments() {
                 className="wd-assignment-link"
               >
                 <Row>
-                  <Col xs={2} md={1} className=" text-nowrap">
+                  <Col xs={2} md={1} className=" text-nowrap m-2">
                     <BsGripVertical className="me-2 fs-3 align-center" />
                     <MdEditNote className="me-2 fs-3 align-center font-green" />
                   </Col>
@@ -138,7 +138,7 @@ export default function Assignments() {
             <ListGroupItem className="wd-quizzes-list-item p-3 ps-1">
               <Link href="./Quizzes" className="wd-quizzes-link">
                 <Row>
-                  <Col xs={2} md={1} className=" text-nowrap">
+                  <Col xs={2} md={1} className=" text-nowrap m-2">
                     <BsGripVertical className="me-2 fs-3 align-center" />
                     <MdEditNote className="me-2 fs-3 align-center font-green" />
                   </Col>
@@ -167,7 +167,7 @@ export default function Assignments() {
             <ListGroupItem className="wd-quizzes-list-item p-3 ps-1">
               <Link href="./Quizzes" className="wd-quizzes-link">
                 <Row>
-                  <Col xs={2} md={1} className=" text-nowrap">
+                  <Col xs={2} md={1} className=" text-nowrap m-2">
                     <BsGripVertical className="me-2 fs-3 align-center" />
                     <MdEditNote className="me-2 fs-3 align-center font-green" />
                   </Col>
@@ -210,7 +210,7 @@ export default function Assignments() {
           <ListGroup className="wd-project-list rounded-0">
             <ListGroupItem className="wd-project-list-item p-3 ps-1">
               <Row>
-                <Col xs={2} md={1} className=" text-nowrap">
+                <Col xs={2} md={1} className=" text-nowrap m-2">
                   <BsGripVertical className="me-2 fs-3 align-center" />
                   <MdEditNote className="me-2 fs-3 align-center font-green" />
                 </Col>
@@ -249,7 +249,7 @@ export default function Assignments() {
           <ListGroup className="wd-exam-list rounded-0">
             <ListGroupItem className="wd-exam-list-item p-3 ps-1">
               <Row>
-                <Col xs={2} md={1} className=" text-nowrap">
+                <Col xs={2} md={1} className=" text-nowrap m-2">
                   <BsGripVertical className="me-2 fs-3 align-center" />
                   <MdEditNote className="me-2 fs-3 align-center font-green" />
                 </Col>
@@ -273,7 +273,7 @@ export default function Assignments() {
 
             <ListGroupItem className="wd-exam-list-item p-3 ps-1">
               <Row>
-                <Col xs={2} md={1} className=" text-nowrap">
+                <Col xs={2} md={1} className=" text-nowrap m-2">
                   <BsGripVertical className="me-2 fs-3 align-center" />
                   <MdEditNote className="me-2 fs-3 align-center font-green" />
                 </Col>
