@@ -31,7 +31,7 @@ export default function KambazNavigation() {
           className="text-white text-decoration-none"
         >
           <div className="nav-icons">
-            <FaRegCircleUser className="fs-1 text-white m-1" />
+            <FaRegCircleUser className="fs-1 text-white" />
             Account
           </div>
         </Link>
@@ -43,7 +43,7 @@ export default function KambazNavigation() {
           id="wd-dashboard-link"
           className="text-danger text-decoration-none"
         >
-          <AiOutlineDashboard className="fs-1 text-danger m-1" />
+          <AiOutlineDashboard className="fs-1 text-danger" />
           Dashboard
         </Link>
       </ListGroupItem>
@@ -55,7 +55,7 @@ export default function KambazNavigation() {
           className="text-danger text-decoration-none"
         >
           <div className="nav-icons">
-            <LiaBookSolid className="fs-1 text-danger m-1" />
+            <LiaBookSolid className="fs-1 text-danger" />
             Courses
           </div>
         </Link>
@@ -65,7 +65,7 @@ export default function KambazNavigation() {
         <Link
           href="/Calender"
           id="wd-calender-link"
-          className="text-danger text-decoration-none m-1"
+          className="text-danger text-decoration-none"
         >
           <div className="nav-icons">
             <IoCalendarOutline className="fs-1 text-danger" />

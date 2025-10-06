@@ -8,16 +8,24 @@ export default function Signup() {
       <Row className="margin-bottom-15">
         <Col md={6}>
           <FormGroup className="mb-3 margin-bottom-15" controlId="wd-username">
-            <FormControl placeholder="username" />
+            <FormControl placeholder="username" defaultValue={"Preethi"} />
           </FormGroup>
           <FormGroup className="mb-3 margin-bottom-15" controlId="wd-password">
-            <FormControl type="password" placeholder="password" />
+            <FormControl
+              type="password"
+              placeholder="password"
+              defaultValue={"Preethi"}
+            />
           </FormGroup>
           <FormGroup
             className="mb-3 margin-bottom-15"
             controlId="wd-verify-password"
           >
-            <FormControl type="password" placeholder="verify password" />
+            <FormControl
+              type="password"
+              placeholder="verify password"
+              defaultValue={"Preethi"}
+            />
           </FormGroup>
           <Link href="Profile" className="text-white ">
             <Button

@@ -111,7 +111,7 @@ export default function BootstrapForms() {
       </div>
       <br />
       <div id="wd-css-responsive-forms-2">
-        <h3>Responsive forms</h3>
+        <h3>Responsive forms 2</h3>
         <Form>
           <Form.Group as={Row} className="mb-3">
             <Form.Label column sm={2}>
