@@ -157,12 +157,7 @@ export default function AssignmentEditor() {
                 <Col sm={12} className=" margin-top-15">
                   <b>Due</b>
                   <div className="margin-bottom-15">
-                    <InputGroup className="mb-3">
-                      <FormControl defaultValue={"May 13, 2024, 11.59 pm"} />
-                      <InputGroup.Text>
-                        <FaRegCalendarAlt />
-                      </InputGroup.Text>
-                    </InputGroup>
+                    <FormControl type="date" defaultValue="2024-05-13" />
                   </div>
                 </Col>
               </Row>
@@ -171,23 +166,13 @@ export default function AssignmentEditor() {
                 <Col sm={6} className=" margin-top-15">
                   <b>Available From</b>
                   <div className="margin-bottom-15">
-                    <InputGroup className="mb-3">
-                      <FormControl defaultValue={"May 6, 2024, 11.59 pm"} />
-                      <InputGroup.Text>
-                        <FaRegCalendarAlt />
-                      </InputGroup.Text>
-                    </InputGroup>
+                    <FormControl type="date" defaultValue="2024-05-06" />
                   </div>
                 </Col>
                 <Col sm={6} className=" margin-top-15">
                   <b>Until</b>
                   <div className="margin-bottom-15">
-                    <InputGroup className="mb-3">
-                      <FormControl defaultValue={"May 20, 2024, 11.59 pm"} />
-                      <InputGroup.Text>
-                        <FaRegCalendarAlt />
-                      </InputGroup.Text>
-                    </InputGroup>
+                    <FormControl type="date" defaultValue="2024-05-20" />
                   </div>
                 </Col>
               </Row>

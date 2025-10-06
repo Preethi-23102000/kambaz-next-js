@@ -64,7 +64,7 @@ body * {
   --bs-list-group-border-color: gray; 
 } 
 
-.wd-lesson { 
+.wd-lesson ,.wd-assignment-list-item ,.wd-quizzes-list-item,.wd-project-list-item,.wd-exam-list-item{ 
   border-left: 3px solid green !important; 
 } 
 
@@ -196,4 +196,5 @@ body * {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: white;
 }

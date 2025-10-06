@@ -30,8 +30,10 @@ export default function KambazNavigation() {
           id="wd-account-link"
           className="text-white text-decoration-none"
         >
-          <FaRegCircleUser className="fs-1 text-white m-1" />
-          Account
+          <div className="nav-icons">
+            <FaRegCircleUser className="fs-1 text-white m-1" />
+            Account
+          </div>
         </Link>
       </ListGroupItem>
 
@@ -52,8 +54,10 @@ export default function KambazNavigation() {
           id="wd-courses-link"
           className="text-danger text-decoration-none"
         >
-          <LiaBookSolid className="fs-1 text-danger m-1" />
-          Courses
+          <div className="nav-icons">
+            <LiaBookSolid className="fs-1 text-danger m-1" />
+            Courses
+          </div>
         </Link>
       </ListGroupItem>
 
@@ -63,8 +67,10 @@ export default function KambazNavigation() {
           id="wd-calender-link"
           className="text-danger text-decoration-none m-1"
         >
-          <IoCalendarOutline className="fs-1 text-danger" />
-          Calender
+          <div className="nav-icons">
+            <IoCalendarOutline className="fs-1 text-danger" />
+            Calender
+          </div>
         </Link>
       </ListGroupItem>
 
