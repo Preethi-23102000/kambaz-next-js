@@ -1,60 +1,107 @@
-export default function People() {
+import { Table } from "react-bootstrap";
+import { FaUserCircle } from "react-icons/fa";
+export default function PeopleTable() {
   return (
-    <div id="wd-people">
-      <h1 id="wd-people-title">People</h1>
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <label htmlFor="wd-select-role">Filter Role: </label>
-      <select id="wd-select-role">
-        <option defaultValue="All">All</option>
-        <option value="Assignment-1">Professor</option>
-        <option value="Assignment-2">Student</option>
-        <option value="Assignment-3">Teaching Assistant</option>
-      </select>
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <label htmlFor="wd-select-sort-by">Sort By: </label>
-      <select id="wd-select-sort-by">
-        <option defaultValue="role">Role</option>
-        <option value="student-name-a-z">Name A-Z</option>
-        <option value="student-name-z-a">Name Z-A</option>
-      </select>
-      <br />
-      <br />
-      <table id="wd-grades-table" border={1} cellPadding={5} cellSpacing={0}>
+    <div id="wd-people-table">
+      <Table striped>
+        {" "}
         <thead>
           <tr>
             <th>Name</th>
+            <th>Login ID</th>
+            <th>Section</th>
             <th>Role</th>
-            <th>Email</th>
+            <th>Last Activity</th>
+            <th>Total Activity</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Jose Annunziato</td>
-            <td>Professor</td>
-            <td>jose.annunziato@college.edu</td>
+            <td className="wd-full-name text-nowrap">
+              <FaUserCircle className="me-2 fs-1 text-secondary" />
+              <span className="wd-first-name">Tony</span>{" "}
+              <span className="wd-last-name">Stark</span>
+            </td>
+            <td className="wd-login-id">001234561S</td>
+            <td className="wd-section">S101</td>
+            <td className="wd-role">STUDENT</td>
+            <td className="wd-last-activity">2020-10-01</td>
+            <td className="wd-total-activity">10:21:32</td>
           </tr>
           <tr>
-            <td>Pareeksit Bagh</td>
-            <td>Teaching Assistant</td>
-            <td>pareekdit.bagh@college.edu</td>
+            <td className="wd-full-name text-nowrap">
+              <FaUserCircle className="me-2 fs-1 text-secondary" />
+              <span className="wd-first-name">Steve</span>{" "}
+              <span className="wd-last-name">Rogers</span>
+            </td>
+            <td className="wd-login-id">00123456SR</td>
+            <td className="wd-section">S102</td>
+            <td className="wd-role">STUDENT</td>
+            <td className="wd-last-activity">2020-10-01</td>
+            <td className="wd-total-activity">07:21:12</td>
           </tr>
           <tr>
-            <td>John doe</td>
-            <td>Student</td>
-            <td>john.doe@college.edu</td>
+            <td className="wd-full-name text-nowrap">
+              <FaUserCircle className="me-2 fs-1 text-secondary" />
+              <span className="wd-first-name">Natasha</span>{" "}
+              <span className="wd-last-name">Romanoff</span>
+            </td>
+            <td className="wd-login-id">00123456NR</td>
+            <td className="wd-section">S103</td>
+            <td className="wd-role">TA</td>
+            <td className="wd-last-activity">2020-10-01</td>
+            <td className="wd-total-activity">12:29:32</td>
           </tr>
           <tr>
-            <td>Preethi Y</td>
-            <td>Student</td>
-            <td>preethi.y@college.edu</td>
+            <td className="wd-full-name text-nowrap">
+              <FaUserCircle className="me-2 fs-1 text-secondary" />
+              <span className="wd-first-name">Bruce</span>{" "}
+              <span className="wd-last-name">Banner</span>
+            </td>
+            <td className="wd-login-id">00123456BB</td>
+            <td className="wd-section">S104</td>
+            <td className="wd-role">STUDENT</td>
+            <td className="wd-last-activity">2020-10-01</td>
+            <td className="wd-total-activity">10:21:32</td>
           </tr>
           <tr>
-            <td>Swathi B</td>
-            <td>Student</td>
-            <td>swathi.b@college.edu</td>
+            <td className="wd-full-name text-nowrap">
+              <FaUserCircle className="me-2 fs-1 text-secondary" />
+              <span className="wd-first-name">Thor</span>{" "}
+              <span className="wd-last-name">Odinson</span>
+            </td>
+            <td className="wd-login-id">00123456TO</td>
+            <td className="wd-section">S105</td>
+            <td className="wd-role">STUDENT</td>
+            <td className="wd-last-activity">2020-10-01</td>
+            <td className="wd-total-activity">11:21:42</td>
+          </tr>
+          <tr>
+            <td className="wd-full-name text-nowrap">
+              <FaUserCircle className="me-2 fs-1 text-secondary" />
+              <span className="wd-first-name">Clint</span>{" "}
+              <span className="wd-last-name">Barton</span>
+            </td>
+            <td className="wd-login-id">00123456CB</td>
+            <td className="wd-section">S106</td>
+            <td className="wd-role">STUDENT</td>
+            <td className="wd-last-activity">2020-10-01</td>
+            <td className="wd-total-activity">08:21:32</td>
+          </tr>
+          <tr>
+            <td className="wd-full-name text-nowrap">
+              <FaUserCircle className="me-2 fs-1 text-secondary" />
+              <span className="wd-first-name">Bruce</span>{" "}
+              <span className="wd-last-name">Wayne</span>
+            </td>
+            <td className="wd-login-id">00123456BW</td>
+            <td className="wd-section">S107</td>
+            <td className="wd-role">STUDENT</td>
+            <td className="wd-last-activity">2020-10-01</td>
+            <td className="wd-total-activity">10:21:32</td>
           </tr>
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 }

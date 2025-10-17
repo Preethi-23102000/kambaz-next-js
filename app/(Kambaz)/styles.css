@@ -1,0 +1,200 @@
+body   
+{ 
+  margin: 0; 
+  padding: 0; 
+} 
+body * { 
+  font-family: Arial,Helvetica, sans-serif; 
+} 
+
+@media (min-width: 768px) { 
+  #wd-kambaz .wd-main-content-offset { 
+    padding-left: 140px !important; 
+  } 
+} 
+
+.list-group.wd > .list-group-item.active,.list-group.wd-2 > .list-group-item.active { 
+  color: black; 
+  background-color: white; 
+  border-left: 3px solid black !important; 
+} 
+
+
+.nav-bar-active{
+  background-color: white;
+  color: red !important;
+}
+
+.nav-bar-unactive{
+  background-color: black;
+  color: white !important;
+}
+
+.course-bar-active{
+   color: black; 
+  background-color: white; 
+  border-left: 3px solid black !important; 
+}
+
+.course-bar-unactive{
+   color: red; 
+  background-color: white; 
+}
+
+.list-group.wd{
+  width: 250px
+}
+
+.list-group.wd-2{
+  width: 100px
+}
+
+.btn-secondary { 
+  --bs-btn-color: #000 !important; 
+  --bs-btn-bg: #c7cdd1 !important; 
+  --bs-btn-border-color: #c7cdd1 !important; 
+  --bs-btn-hover-color: #fff !important; 
+} 
+
+.bg-secondary { 
+  --bs-secondary-rgb: 199, 205, 209; 
+} 
+
+.list-group-item { 
+  --bs-list-group-border-color: gray; 
+} 
+
+.wd-lesson ,.wd-assignment-list-item ,.wd-quizzes-list-item,.wd-project-list-item,.wd-exam-list-item{ 
+  border-left: 3px solid green !important; 
+} 
+
+.navi-list-group{
+    width: 300px;
+}
+
+
+/* My CSS*/
+
+.assignment-btns{
+  padding: 5px 20px;
+  margin-left: 15px;
+}
+
+.account-btns{
+  width:100%;
+}
+
+.align-center{
+    position: relative;
+    top: 40%;
+}
+
+.align-center-2{
+    position: absolute;
+    top: 40%;
+    right: 0%;
+}
+
+
+.align-text-right {
+  text-align: right;
+}
+
+.bold-fs{
+    font-size:x-large;
+    font-weight: bold ;
+}
+
+.border-round{
+  border: lightgray solid;
+  border-radius: 5;
+  padding: 15px;
+}
+
+.font-red{
+    color:red;
+}
+
+.font-green{
+    color:green;
+}
+
+.margin-left-15{
+  margin-left: 15px;
+}
+
+.margin-top-15{
+  margin-top: 15px;
+}
+
+.margin-bottom-15{
+  margin-bottom: 15px;
+}
+
+.padding-left-65{
+     padding-left: 65px;
+}
+
+.padding-right-65{
+     padding-right: 65px;
+}
+
+.solid-grey{
+  background-color: rgb(235, 232, 232);
+  border-radius: 5;
+  padding: 5px 10px;
+}
+
+.search-wrapper { 
+    position: relative;
+    top:5px; 
+    width: 350px;
+}
+
+.search-icon {
+    background-color: white;
+    border-right: none;
+}
+
+.search-input {
+    border-left: none;
+}
+
+.section-weightage{
+    display: inline-block;     
+    padding: 3px 20px;
+    border-radius: 20px;
+    border: 1px solid;
+    border-color: grey;
+}
+
+.assignment-details, .quizzes-details, .project-details, .exam-details{
+    font-size: medium;
+   
+}
+
+.wd-assignment-link, .wd-quizzes-link,.wd-project-link, .wd-exam-link {
+  text-decoration: none; 
+  color: inherit;   
+}
+
+.wd-grades-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-right: 1rem;
+  overflow-x: auto;
+}
+
+#wd-grades-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.nav-icons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
