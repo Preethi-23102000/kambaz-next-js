@@ -1,0 +1,240 @@
+[
+  {
+    "_id": "A101",
+    "title": "Propulsion Assignment",
+    "course": "RS101",
+    "modules": "Multiple Modules",
+    "availableDateWords": "May 6 at 12:00 am",
+    "dueDateWords": "May 13 at 11:59 pm",
+    "points": 100,
+    "available": "2025-05-06",
+    "due": "2025-05-13",
+    "until": "2025-06-13",
+    "description": {
+      "summary": "The assignment is available online and is called Propulsion assignment. Submit a link to the landing page of your Web application running on Netlify.",
+      "requirements": [
+        "Your full name and section",
+        "Links to each of the lab assignments",
+        "Link to the Kanbas application",
+        "Links to all relevant source code repositories"
+      ],
+      "note": "The Kanbas application should include a link to navigate back to the landing page."
+     },
+    "assignmentGroup":"ASSIGNMENTS",
+    "displayGrade":"Percentage",
+    "submissionType":"Online",
+    "assignedTo":"Everyone"
+  },
+  {
+    "_id": "A102",
+    "title": "Combustion Analysis",
+    "course": "RS101",
+    "modules": "Multiple Modules",
+    "availableDateWords": "May 13 at 12:00 am",
+    "dueDateWords": "May 21 at 11:59 pm",
+    "points": 100,
+    "available": "2025-05-13",
+    "due": "2025-05-21",
+    "until": "2025-06-21",
+    "description": {
+      "summary": "The assignment is available online and is for Combustion Analysis. Submit a link to the landing page of your Web application running on Netlify.",
+      "requirements": [
+        "Your full name and section",
+        "Links to each of the lab assignments",
+        "Link to the Kanbas application",
+        "Links to all relevant source code repositories"
+      ],
+      "note": "The Kanbas application should include a link to navigate back to the landing page."
+     },
+    "assignmentGroup":"ASSIGNMENTS",
+    "displayGrade":"Percentage",
+    "submissionType":"Online",
+    "assignedTo":"Everyone"
+  },
+  {
+    "_id": "A103",
+    "title": "Nozzle Design Project",
+    "course": "RS101",
+    "modules": "Multiple Modules",
+    "availableDateWords": "May 20 at 12:00 am",
+    "dueDateWords": "May 27 at 11:59 pm",
+    "points": 100,
+    "available": "2025-05-21",
+    "due": "2025-05-28",
+    "until": "2025-06-28",
+    "description": {
+      "summary": "The assignment is available online and is for Nozzle Design Project. Submit a link to the landing page of your Web application running on Netlify.",
+      "requirements": [
+        "Your full name and section",
+        "Links to each of the lab assignments",
+        "Link to the Kanbas application",
+        "Links to all relevant source code repositories"
+      ],
+      "note": "The Kanbas application should include a link to navigate back to the landing page."
+     },
+    "assignmentGroup":"ASSIGNMENTS",
+    "displayGrade":"Percentage",
+    "submissionType":"Online",
+    "assignedTo":"Everyone"
+  },
+
+    {
+    "_id": "A201",
+    "title": "Aerodynamics Basics",
+    "course": "RS102",
+    "modules": "Multiple Modules",
+    "availableDateWords": "May 13 at 12:00 am",
+    "dueDateWords": "May 14 at 11:59 pm",
+    "points": 50,
+    "available": "2025-05-06",
+    "due": "2025-05-13",
+    "until": "2025-06-13",
+    "description": {
+      "summary": "The assignment is available online and is called Aerodynamics Basics. Submit a link to the landing page of your Web application running on Netlify.",
+      "requirements": [
+        "Your full name and section",
+        "Links to each of the lab assignments",
+        "Link to the Kanbas application",
+        "Links to all relevant source code repositories"
+      ],
+      "note": "The Kanbas application should include a link to navigate back to the landing page."
+     },
+    "assignmentGroup":"ASSIGNMENTS",
+    "displayGrade":"Percentage",
+    "submissionType":"Online",
+    "assignedTo":"Everyone"
+  },
+  {
+    "_id": "A202",
+    "title": "Flow Analysis",
+    "course": "RS102",
+    "modules": "Multiple Modules",
+    "availableDateWords": "May 13 at 12:00 am",
+    "dueDateWords": "May 21 at 11:59 pm",
+    "points": 75,
+    "available": "2025-05-13",
+    "due": "2025-05-21",
+    "until": "2025-06-21",
+    "description": {
+      "summary": "The assignment is available online and is for Flow Analysis. Submit a link to the landing page of your Web application running on Netlify.",
+      "requirements": [
+        "Your full name and section",
+        "Links to each of the lab assignments",
+        "Link to the Kanbas application",
+        "Links to all relevant source code repositories"
+      ],
+      "note": "The Kanbas application should include a link to navigate back to the landing page."
+     },
+    "assignmentGroup":"ASSIGNMENTS",
+    "displayGrade":"Percentage",
+    "submissionType":"Online",
+    "assignedTo":"Everyone"
+  },
+  
+  {
+    "_id": "A203",
+    "title": "Heating Analysis",
+    "course": "RS102",
+    "modules": "Multiple Modules",
+    "availableDateWords": "May 21 at 12:00 am",
+    "dueDateWords": "May 28 at 11:59 pm",
+    "points": 75,
+    "available": "2025-05-21",
+    "due": "2025-05-28",
+    "until": "2025-06-28",
+    "description": {
+      "summary": "The assignment is available online and is for Heating Analysis. Submit a link to the landing page of your Web application running on Netlify.",
+      "requirements": [
+        "Your full name and section",
+        "Links to each of the lab assignments",
+        "Link to the Kanbas application",
+        "Links to all relevant source code repositories"
+      ],
+      "note": "The Kanbas application should include a link to navigate back to the landing page."
+     },
+    "assignmentGroup":"ASSIGNMENTS",
+    "displayGrade":"Percentage",
+    "submissionType":"Online",
+    "assignedTo":"Everyone"
+  },
+
+  {
+    "_id": "A301",
+    "title": "Structural Design Task",
+    "course": "RS103",
+    "modules": "Multiple Modules",
+    "availableDateWords": "June 3 at 12:00 am",
+    "dueDateWords": "June 10 at 11:59 pm",
+    "points": 100,
+     "available": "2025-06-03",
+    "due": "2025-06-10",
+    "until": "2025-07-10",
+    "description": {
+      "summary": "The assignment is available online and is called Structural Design Task. Submit a link to the landing page of your Web application running on Netlify.",
+      "requirements": [
+        "Your full name and section",
+        "Links to each of the lab assignments",
+        "Link to the Kanbas application",
+        "Links to all relevant source code repositories"
+      ],
+      "note": "The Kanbas application should include a link to navigate back to the landing page."
+     },
+    "assignmentGroup":"ASSIGNMENTS",
+    "displayGrade":"Grades",
+    "submissionType":"Online",
+    "assignedTo":"Everyone"
+  },
+  {
+    "_id": "A302",
+    "title": "Orbital Calculations",
+    "course": "RS103",
+    "modules": "Multiple Modules",
+    "availableDateWords": "June 10 at 12:00 am",
+    "dueDateWords": "June 17 at 11:59 pm",
+    "points": 100,
+     "available": "2025-06-10",
+    "due": "2025-06-17",
+    "until": "2025-07-17",
+    "description": {
+      "summary": "The assignment is available online and is called Oribital Calculations. Submit a link to the landing page of your Web application running on Netlify.",
+      "requirements": [
+        "Your full name and section",
+        "Links to each of the lab assignments",
+        "Link to the Kanbas application",
+        "Links to all relevant source code repositories"
+      ],
+      "note": "The Kanbas application should include a link to navigate back to the landing page."
+     },
+    "assignmentGroup":"ASSIGNMENTS",
+    "displayGrade":"Grades",
+    "submissionType":"Online",
+    "assignedTo":"Everyone"
+  },
+  {
+    "_id": "A303",
+    "title": "Systems Engineering Exam",
+    "course": "RS103",
+    "modules": "Multiple Modules",
+    "availableDateWords": "June 17 at 12:00 am",
+    "dueDateWords": "June 24 at 11:59 pm",
+    "points": 150,
+    "available": "2025-06-17",
+    "due": "2025-06-24", 
+    "until": "2025-07-24",
+    "description": {
+      "summary": "The assignment is available online and is called Systems Engineering Exam. Submit a link to the landing page of your Web application running on Netlify.",
+      "requirements": [
+        "Your full name and section",
+        "Links to each of the lab assignments",
+        "Link to the Kanbas application",
+        "Links to all relevant source code repositories"
+      ],
+      "note": "The Kanbas application should include a link to navigate back to the landing page."
+     },
+    "assignmentGroup":"ASSIGNMENTS",
+    "displayGrade":"Grades",
+    "submissionType":"Online",
+    "assignedTo":"Everyone"
+  }
+
+]

@@ -1,19 +1,65 @@
 "use client";
+
+// Function to get today's date in YYYY-MM-DD format
+const today = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
+// Function to get the date one week from today in YYYY-MM-DD format,
+// just to indicate the user has not provided dur date hence setting to default 1 week timeline
+const oneWeekFromToday = () => {
+  const now = new Date();
+  now.setDate(now.getDate() + 7);
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
+// Function to get the date onw month from today in YYYY-MM-DD format approximately,
+// just to indicate the user has not provided available until hence setting to default 1 month timeline
+const oneMonthFromToday = () => {
+  const now = new Date();
+  now.setDate(now.getDate() + 30);
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
+import { useParams } from "next/navigation";
+import Link from "next/link";
+import * as db from "../../../../Database";
 import {
   FormGroup,
   FormLabel,
   FormControl,
   FormSelect,
   Form,
-  InputGroup,
   Row,
   Col,
   Button,
 } from "react-bootstrap";
-import { FaRegCalendarAlt } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 
 export default function AssignmentEditor() {
+  console.log("today() =>", today());
+
+  const { cid } = useParams();
+  const { aid } = useParams();
+
+  const assignments = db.assignments.filter(
+    (assignment: any) => assignment.course === cid
+  );
+
+  const assignment = assignments.find(
+    (assignment: any) => assignment._id === aid
+  );
+
   return (
     <div id="wd-assignments-editor">
       <FormGroup
@@ -21,18 +67,41 @@ export default function AssignmentEditor() {
         controlId="wd-assignment-name"
       >
         <FormLabel>Assignment Name</FormLabel>
-        <FormControl defaultValue="A1" />
+        <FormControl
+          defaultValue={assignment ? assignment.title : "No title Provided"}
+        />
       </FormGroup>
+
       <FormGroup className="mb-3" controlId="wd-textarea">
         <FormControl
           as="textarea"
           rows={10}
           cols={50}
           defaultValue={
-            "The assignment is available online Submit a link to the landing page of your Web application running on Netify. The landing should include the following: Your full name and section links to each of the lab assignments link to the kanbas application. Links to all relevan source code repositories. The kambaz application should include a link to navigate back to the landing page."
+            assignment //using nexted ternary operators to check for existence of description, summary, requirements, and note
+              ? assignment.description
+                ? `${
+                    assignment.description.summary
+                      ? assignment.description.summary
+                      : "No summary provided."
+                  }\n\n${
+                    assignment.description.requirements &&
+                    assignment.description.requirements.length > 0
+                      ? "The landing page should include the following:\n- " +
+                        assignment.description.requirements.join("\n- ") +
+                        "\n\n"
+                      : "No requirements provided.\n\n"
+                  }${
+                    assignment.description.note
+                      ? assignment.description.note
+                      : "No note provided."
+                  }`
+                : "No description provided."
+              : "No assignment found."
           }
         />
       </FormGroup>
+
       <FormGroup className="mb-3" controlId="wd-points">
         <Row>
           <Col
@@ -45,7 +114,9 @@ export default function AssignmentEditor() {
           <Col xs={8}>
             <FormControl
               className="margin-bottom-15 margin-top-15"
-              defaultValue="100"
+              defaultValue={
+                assignment ? (assignment.points ? assignment.points : 0) : 0
+              }
             />
           </Col>
         </Row>
@@ -60,8 +131,19 @@ export default function AssignmentEditor() {
           </Col>
 
           <Col xs={8} className=" margin-bottom-15 margin-top-15">
-            <FormSelect>
-              <option selected>ASSIGNMENTS</option>
+            <FormSelect
+              defaultValue={
+                assignment
+                  ? assignment.assignmentGroup
+                    ? assignment.assignmentGroup
+                    : "none"
+                  : "none"
+              }
+            >
+              <option value="none" disabled>
+                No Group Selected
+              </option>
+              <option>ASSIGNMENTS</option>
               <option>QUIZZES</option>
               <option>PROJECT</option>
               <option>EXAMS</option>
@@ -79,13 +161,25 @@ export default function AssignmentEditor() {
           </Col>
 
           <Col xs={8} className="margin-bottom-15 margin-top-15">
-            <FormSelect>
-              <option selected>Percentage</option>
+            <FormSelect
+              defaultValue={
+                assignment
+                  ? assignment.displayGrade
+                    ? assignment.displayGrade
+                    : "none"
+                  : "none"
+              }
+            >
+              <option value="none" disabled>
+                No Grade type Selected
+              </option>
+              <option>Percentage</option>
               <option>Grades</option>
             </FormSelect>
           </Col>
         </Row>
       </FormGroup>
+
       <FormGroup className="mb-3 " controlId="wd-submission-type">
         <Row>
           <Col
@@ -97,8 +191,20 @@ export default function AssignmentEditor() {
 
           <Col xs={8} className="margin-bottom-15 margin-top-15">
             <div className="border-round">
-              <FormSelect className="margin-bottom-15 margin-top-15">
-                <option selected>Online</option>
+              <FormSelect
+                className="margin-bottom-15 margin-top-15"
+                defaultValue={
+                  assignment
+                    ? assignment.submissionType
+                      ? assignment.submissionType
+                      : "none"
+                    : "none"
+                }
+              >
+                <option value="none" disabled>
+                  No Group Selected
+                </option>
+                <option>Online</option>
                 <option>On Paper</option>
               </FormSelect>
 
@@ -149,7 +255,11 @@ export default function AssignmentEditor() {
               <b>Assign to</b>
               <div className="border-round margin-bottom-15 ">
                 <span className="solid-grey">
-                  Everyone
+                  {assignment
+                    ? assignment.assignedTo
+                      ? assignment.assignedTo
+                      : "Not Assigned"
+                    : "Not Assigned"}
                   <RxCross2 className="margin-left-15 justify-content-end" />
                 </span>
               </div>
@@ -157,7 +267,16 @@ export default function AssignmentEditor() {
                 <Col sm={12} className=" margin-top-15">
                   <b>Due</b>
                   <div className="margin-bottom-15">
-                    <FormControl type="date" defaultValue="2024-05-13" />
+                    <FormControl
+                      type="date"
+                      value={
+                        assignment
+                          ? assignment.due && assignment.due !== ""
+                            ? assignment.due
+                            : oneWeekFromToday()
+                          : oneWeekFromToday()
+                      }
+                    />
                   </div>
                 </Col>
               </Row>
@@ -166,13 +285,31 @@ export default function AssignmentEditor() {
                 <Col sm={6} className=" margin-top-15">
                   <b>Available From</b>
                   <div className="margin-bottom-15">
-                    <FormControl type="date" defaultValue="2024-05-06" />
+                    <FormControl
+                      type="date"
+                      value={
+                        assignment
+                          ? assignment.available && assignment.available !== ""
+                            ? assignment.available
+                            : today()
+                          : today()
+                      }
+                    />
                   </div>
                 </Col>
                 <Col sm={6} className=" margin-top-15">
                   <b>Until</b>
                   <div className="margin-bottom-15">
-                    <FormControl type="date" defaultValue="2024-05-20" />
+                    <FormControl
+                      type="date"
+                      value={
+                        assignment
+                          ? assignment.until && assignment.until !== ""
+                            ? assignment.until
+                            : oneMonthFromToday()
+                          : oneMonthFromToday()
+                      }
+                    />
                   </div>
                 </Col>
               </Row>
@@ -181,20 +318,25 @@ export default function AssignmentEditor() {
         </Row>
       </FormGroup>
       <hr />
-      <Button
-        variant="danger"
-        id="wd-save-assignment-btn"
-        className="text-nowrap float-end assignment-btns"
-      >
-        Save
-      </Button>
-      <Button
-        variant="secondary"
-        id="wd-cancel-assignment-btn"
-        className="text-nowrap float-end assignment-btns"
-      >
-        Cancel
-      </Button>
+      <Link href={`/Courses/${cid}/Assignments`}>
+        <Button
+          variant="danger"
+          id="wd-save-assignment-btn"
+          className="text-nowrap float-end assignment-btns"
+        >
+          Save
+        </Button>
+      </Link>
+
+      <Link href={`/Courses/${cid}/Assignments`}>
+        <Button
+          variant="secondary"
+          id="wd-cancel-assignment-btn"
+          className="text-nowrap float-end assignment-btns"
+        >
+          Cancel
+        </Button>
+      </Link>
     </div>
   );
 }
