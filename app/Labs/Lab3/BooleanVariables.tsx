@@ -23,7 +23,7 @@ export default function BooleanVariables() {
   // let false3 = numberVariable < 100;
 
   const numberVariable = 123,
-    floatingPointNumber = 234.345;
+    floatingPointNumber = 234.345 as number;
   const true1 = true,
     false1 = false;
   const false2 = true1 && false1;
