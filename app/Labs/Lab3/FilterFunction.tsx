@@ -1,5 +1,8 @@
 export default function FilterFunction() {
-  let numberArray1 = [1, 2, 4, 5, 6];
+  //using const to fix:
+  // Error: 'numberArray1' is never reassigned. Use 'const' instead.  prefer-const
+  // let numberArray1 = [1, 2, 4, 5, 6];
+  const numberArray1 = [1, 2, 4, 5, 6];
   const numbersGreaterThan2 = numberArray1.filter((a) => a > 2);
   const evenNumbers = numberArray1.filter((a) => a % 2 === 0);
   const oddNumbers = numberArray1.filter((a) => a % 2 !== 0);

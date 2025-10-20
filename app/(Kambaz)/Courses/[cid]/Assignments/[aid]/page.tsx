@@ -45,6 +45,7 @@ import {
   Button,
 } from "react-bootstrap";
 import { RxCross2 } from "react-icons/rx";
+import type { Assignment } from "../../../../Database/userDefinedTypes";
 
 export default function AssignmentEditor() {
   console.log("today() =>", today());
@@ -53,11 +54,11 @@ export default function AssignmentEditor() {
   const { aid } = useParams();
 
   const assignments = db.assignments.filter(
-    (assignment: any) => assignment.course === cid
+    (assignment: Assignment) => assignment.course === cid
   );
 
   const assignment = assignments.find(
-    (assignment: any) => assignment._id === aid
+    (assignment: Assignment) => assignment._id === aid
   );
 
   return (

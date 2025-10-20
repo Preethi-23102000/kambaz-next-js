@@ -1,14 +1,38 @@
 export default function BooleanVariables() {
-  let numberVariable = 123,
+  //using const to fix the below errors
+  //Error: 'numberVariable' is never reassigned. Use 'const' instead.  prefer-const
+  //Error: 'floatingPointNumber' is never reassigned. Use 'const' instead.  prefer-const
+  // Error: 'true1' is never reassigned. Use 'const' instead.  prefer-const
+  // Error: 'false1' is never reassigned. Use 'const' instead.  prefer-const
+  // Error: 'false2' is never reassigned. Use 'const' instead.  prefer-const
+  // Error: 'true2' is never reassigned. Use 'const' instead.  prefer-const
+  // Error: 'true3' is never reassigned. Use 'const' instead.  prefer-const
+  // Error: 'true4' is never reassigned. Use 'const' instead.  prefer-const
+  // Error: 'true5' is never reassigned. Use 'const' instead.  prefer-const
+  // Error: 'false3' is never reassigned. Use 'const' instead.  prefer-const
+
+  // let numberVariable = 123,
+  //   floatingPointNumber = 234.345;
+  // let true1 = true,
+  //   false1 = false;
+  // let false2 = true1 && false1;
+  // let true2 = true1 || false1;
+  // let true3 = !false2;
+  // let true4 = numberVariable === 123; // always use === not ==
+  // let true5 = floatingPointNumber !== 321.432;
+  // let false3 = numberVariable < 100;
+
+  const numberVariable = 123,
     floatingPointNumber = 234.345;
-  let true1 = true,
+  const true1 = true,
     false1 = false;
-  let false2 = true1 && false1;
-  let true2 = true1 || false1;
-  let true3 = !false2;
-  let true4 = numberVariable === 123; // always use === not ==
-  let true5 = floatingPointNumber !== 321.432;
-  let false3 = numberVariable < 100;
+  const false2 = true1 && false1;
+  const true2 = true1 || false1;
+  const true3 = !false2;
+  const true4 = numberVariable === 123; // always use === not ==
+  const true5 = floatingPointNumber !== 321.432;
+  const false3 = numberVariable < 100;
+
   return (
     <div id="wd-boolean-variables">
       <h4>Boolean Variables</h4>

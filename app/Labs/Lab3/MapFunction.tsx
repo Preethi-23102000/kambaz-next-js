@@ -1,5 +1,10 @@
 export default function MapFunction() {
-  let numberArray1 = [1, 2, 3, 4, 5, 6];
+  //to fix the below errors, change let to const where variables are never reassigned and also setting key prop for list items
+  //Error: 'numberArray1' is never reassigned. Use 'const' instead.  prefer-const
+  //Error: Missing "key" prop for element in iterator  react/jsx-key
+
+  // let numberArray1 = [1, 2, 3, 4, 5, 6];
+  const numberArray1 = [1, 2, 3, 4, 5, 6];
   const square = (a: number) => a * a;
   const todos = ["Buy milk", "Feed the pets"];
   const squares = numberArray1.map(square);
@@ -12,7 +17,7 @@ export default function MapFunction() {
       Todos:
       <ol>
         {todos.map((todo) => (
-          <li>{todo}</li>
+          <li key={todo}>{todo}</li>
         ))}
       </ol>
       <hr />

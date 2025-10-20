@@ -1,5 +1,8 @@
 export default function TernaryOperator() {
-  let loggedIn = true;
+  //fixing the error
+  //Error: 'loggedIn' is never reassigned. Use 'const' instead.  prefer-const
+  // let loggedIn = true;
+  const loggedIn = true;
   return (
     <div id="wd-ternary-operator">
       <h3>Ternary Operator</h3>

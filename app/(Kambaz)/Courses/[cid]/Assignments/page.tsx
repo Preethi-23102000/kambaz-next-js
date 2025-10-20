@@ -10,11 +10,12 @@ import { MdEditNote } from "react-icons/md";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 
 import AssignmentControlButtons from "./AssignmentControlButtons";
+import type { Assignment } from "../../../Database/userDefinedTypes";
 
 export default function Assignments() {
   const { cid } = useParams();
   const assignments = db.assignments.filter(
-    (assignment: any) => assignment.course === cid
+    (assignment: Assignment) => assignment.course === cid
   );
   return (
     <div id="wd-assignments">
@@ -37,7 +38,7 @@ export default function Assignments() {
             </div>
           ) : (
             <ListGroup className="wd-assignment-list rounded-0">
-              {assignments.map((assignment: any) => (
+              {assignments.map((assignment: Assignment) => (
                 <ListGroupItem
                   key={assignment._id}
                   className="wd-assignment-list-item p-3 ps-1"
