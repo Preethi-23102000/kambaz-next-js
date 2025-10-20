@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { IoCalendarOutline } from "react-icons/io5";
@@ -6,8 +8,18 @@ import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import { GoBeaker } from "react-icons/go";
 import { FaGithub } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 
 export default function KambazNavigation() {
+  const pathname = usePathname();
+  const links = [
+    { label: "Dashboard", path: "/Dashboard", icon: AiOutlineDashboard },
+    { label: "Courses", path: "/Dashboard", icon: LiaBookSolid },
+    { label: "Calender", path: "/Calender", icon: IoCalendarOutline },
+    { label: "Inbox", path: "/Inbox", icon: FaInbox },
+    { label: "Labs", path: "/Labs", icon: GoBeaker },
+  ];
+
   return (
     <ListGroup
       className="rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2 d-flex flex-column align-item-center justify-content-start"
@@ -24,81 +36,41 @@ export default function KambazNavigation() {
         <img src="/images/NEU.png" width="75px" alt="Northeastern University" />
       </ListGroupItem>
 
-      <ListGroupItem className="border-0 bg-black text-center">
-        <Link
-          href="/Account"
-          id="wd-account-link"
-          className="text-white text-decoration-none"
-        >
-          <div className="nav-icons">
-            <FaRegCircleUser className="fs-1 text-white" />
-            Account
-          </div>
-        </Link>
+      <ListGroupItem
+        as={Link}
+        href="/Account"
+        className={`text-center border-0 bg-black
+            ${
+              pathname.includes("Account")
+                ? "bg-white text-danger"
+                : "bg-black text-white"
+            }`}
+      >
+        <FaRegCircleUser
+          className={`fs-1 ${
+            pathname.includes("Account") ? "text-danger" : "text-white"
+          }`}
+        />
+        <br />
+        Account
       </ListGroupItem>
-
-      <ListGroupItem className="border-0 bg-white text-center">
-        <Link
-          href="/Dashboard"
-          id="wd-dashboard-link"
-          className="text-danger text-decoration-none"
+      {links.map((link) => (
+        <ListGroupItem
+          key={link.path}
+          as={Link}
+          href={link.path}
+          className={`bg-black text-center border-0
+              ${
+                pathname.includes(link.label)
+                  ? "text-danger bg-white"
+                  : "text-white bg-black"
+              }`}
         >
-          <AiOutlineDashboard className="fs-1 text-danger" />
-          Dashboard
-        </Link>
-      </ListGroupItem>
-
-      <ListGroupItem className="border-0  bg-black text-center">
-        <Link
-          href="/Dashboard"
-          id="wd-courses-link"
-          className="text-danger text-decoration-none"
-        >
-          <div className="nav-icons">
-            <LiaBookSolid className="fs-1 text-danger" />
-            Courses
-          </div>
-        </Link>
-      </ListGroupItem>
-
-      <ListGroupItem className="border-0 bg-black text-center">
-        <Link
-          href="/Calender"
-          id="wd-calender-link"
-          className="text-danger text-decoration-none"
-        >
-          <div className="nav-icons">
-            <IoCalendarOutline className="fs-1 text-danger" />
-            Calender
-          </div>
-        </Link>
-      </ListGroupItem>
-
-      <ListGroupItem className="border-0 bg-black text-center">
-        <Link
-          href="/Inbox"
-          id="wd-inbox-link"
-          className="text-danger text-decoration-none"
-        >
-          <div className="nav-icons">
-            <FaInbox className="fs-1 text-danger" />
-            Inbox
-          </div>
-        </Link>
-      </ListGroupItem>
-
-      <ListGroupItem className="border-0 bg-black text-center">
-        <Link
-          href="/Labs"
-          id="wd-labs-link"
-          className="text-danger text-decoration-none"
-        >
-          <div className="nav-icons">
-            <GoBeaker className="fs-1 text-danger" />
-            Labs
-          </div>
-        </Link>
-      </ListGroupItem>
+          {link.icon({ className: "fs-1 text-danger" })}
+          <br />
+          {link.label}
+        </ListGroupItem>
+      ))}
 
       <ListGroupItem className="border-0 bg-black text-center ">
         <Link
