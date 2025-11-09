@@ -20,11 +20,26 @@ export default function KambazNavigation() {
 
   const pathname = usePathname();
   const links = [
-    { label: "Dashboard", path: "/Dashboard", icon: AiOutlineDashboard },
-    { label: "Courses", path: "/Dashboard", icon: LiaBookSolid },
-    { label: "Calender", path: "/Calender", icon: IoCalendarOutline },
-    { label: "Inbox", path: "/Inbox", icon: FaInbox },
-    { label: "Labs", path: "/Labs", icon: GoBeaker },
+    {
+      label: "Dashboard",
+      path: "/Dashboard",
+      icon: AiOutlineDashboard,
+      requiresAuth: true,
+    },
+    {
+      label: "Courses",
+      path: "/Dashboard",
+      icon: LiaBookSolid,
+      requiresAuth: true,
+    },
+    {
+      label: "Calender",
+      path: "/Calender",
+      icon: IoCalendarOutline,
+      requiresAuth: true,
+    },
+    { label: "Inbox", path: "/Inbox", icon: FaInbox, requiresAuth: true },
+    { label: "Labs", path: "/Labs", icon: GoBeaker, requiresAuth: false },
   ];
 
   //to handle navigation to dashboard in case of no current user
@@ -76,7 +91,7 @@ export default function KambazNavigation() {
           key={link.path}
           as={Link}
           href={link.path}
-          onClick={handleProtectedClick}
+          onClick={link.requiresAuth ? handleProtectedClick : undefined}
           className={`bg-black text-center border-0
               ${
                 pathname.includes(link.label)
