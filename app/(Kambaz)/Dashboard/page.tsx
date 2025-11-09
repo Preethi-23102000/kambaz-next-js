@@ -1,10 +1,13 @@
 "use client";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { FormControl } from "react-bootstrap";
-import * as db from "../Database";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewCourse, deleteCourse, updateCourse } from "../Courses/reducer";
+import {
+  addNewCourse,
+  deleteCourse,
+  updateCourse,
+  addCourseAndEnrollFaculty,
+} from "../Courses/reducer";
 import { enrollUser, unenrollUser } from "../Enrollments/reducer";
 
 import Link from "next/link";
@@ -47,7 +50,6 @@ export default function Dashboard() {
 
   const isFaculty = currentUser && currentUser.role === "FACULTY";
 
-  // Function to check if user is enrolled in a course
   const isEnrolled = (courseId: string) => {
     if (!currentUser) return false;
     return enrollments.some(
@@ -92,7 +94,9 @@ export default function Dashboard() {
             <button
               className="btn btn-primary float-end mb-2"
               id="wd-add-new-course-click"
-              onClick={() => dispatch(addNewCourse(course))}
+              onClick={() =>
+                (dispatch as any)(addCourseAndEnrollFaculty(course))
+              }
             >
               Add
             </button>
