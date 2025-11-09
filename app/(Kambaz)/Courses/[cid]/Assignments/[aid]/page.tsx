@@ -500,20 +500,25 @@ export default function AssignmentEditor() {
         id="wd-save-assignment-btn"
         className="text-nowrap float-end assignment-btns"
         onClick={() => {
+          // Helper to format date without timezone issues
+          const formatDateWordsLocal = (dateString: string) => {
+            const [year, month, day] = dateString.split("-");
+            const date = new Date(
+              parseInt(year),
+              parseInt(month) - 1,
+              parseInt(day)
+            );
+            return date.toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+            });
+          };
+
           // Format date words for display
           const updatedFormData = {
             ...formData,
-            availableDateWords: new Date(formData.available).toLocaleDateString(
-              "en-US",
-              {
-                month: "short",
-                day: "numeric",
-              }
-            ),
-            dueDateWords: new Date(formData.due).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-            }),
+            availableDateWords: formatDateWordsLocal(formData.available),
+            dueDateWords: formatDateWordsLocal(formData.due),
           };
 
           if (isEditMode) {
