@@ -12,8 +12,8 @@ export default function TOC() {
           as={Link}
           className={`nav-link ${pathname.endsWith("Labs") ? "active" : ""}`}
         >
-          Labs{" "}
-        </NavLink>{" "}
+          Labs
+        </NavLink>
       </NavItem>
       <NavItem>
         <NavLink
@@ -21,8 +21,8 @@ export default function TOC() {
           as={Link}
           className={`nav-link ${pathname.endsWith("Lab1") ? "active" : ""}`}
         >
-          Lab 1{" "}
-        </NavLink>{" "}
+          Lab 1
+        </NavLink>
       </NavItem>
       <NavItem>
         <NavLink
@@ -30,8 +30,8 @@ export default function TOC() {
           as={Link}
           className={`nav-link ${pathname.endsWith("Lab2") ? "active" : ""}`}
         >
-          Lab 2{" "}
-        </NavLink>{" "}
+          Lab 2
+        </NavLink>
       </NavItem>
       <NavItem>
         <NavLink
@@ -39,13 +39,22 @@ export default function TOC() {
           as={Link}
           className={`nav-link ${pathname.endsWith("Lab3") ? "active" : ""}`}
         >
-          Lab 3{" "}
-        </NavLink>{" "}
+          Lab 3
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink
+          href="/Labs/Lab4"
+          as={Link}
+          className={`nav-link ${pathname.endsWith("Lab4") ? "active" : ""}`}
+        >
+          Lab 4
+        </NavLink>
       </NavItem>
       <NavItem>
         <NavLink href="/" as={Link}>
-          Kambaz{" "}
-        </NavLink>{" "}
+          Kambaz
+        </NavLink>
       </NavItem>
       <NavItem>
         <NavLink href="https://github.com/Preethi-23102000/kambaz-next-js">

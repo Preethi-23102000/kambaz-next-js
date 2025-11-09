@@ -10,7 +10,14 @@ import { GoBeaker } from "react-icons/go";
 import { FaGithub } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 
+import { useSelector } from "react-redux";
+import { RootState } from "./store";
+
 export default function KambazNavigation() {
+  const { currentUser } = useSelector(
+    (state: RootState) => state.accountReducer
+  );
+
   const pathname = usePathname();
   const links = [
     { label: "Dashboard", path: "/Dashboard", icon: AiOutlineDashboard },
@@ -19,6 +26,16 @@ export default function KambazNavigation() {
     { label: "Inbox", path: "/Inbox", icon: FaInbox },
     { label: "Labs", path: "/Labs", icon: GoBeaker },
   ];
+
+  //to handle navigation to dashboard in case of no current user
+
+  const handleProtectedClick = (e: any) => {
+    if (!currentUser || !currentUser._id) {
+      e.preventDefault();
+
+      alert("Please log in to access this page.");
+    }
+  };
 
   return (
     <ListGroup
@@ -59,6 +76,7 @@ export default function KambazNavigation() {
           key={link.path}
           as={Link}
           href={link.path}
+          onClick={handleProtectedClick}
           className={`bg-black text-center border-0
               ${
                 pathname.includes(link.label)

@@ -32,6 +32,7 @@ export interface Lesson {
   name: string;
   description :string;
   module: string;
+  editing?: boolean;
 }
 
 export interface Module {
@@ -40,6 +41,7 @@ export interface Module {
   description: string;
   course: string;
   lessons: Lesson[];
+   editing?: boolean;
 }
 
 export interface User{
