@@ -59,9 +59,9 @@
     "availableDateWords": "May 20 at 12:00 am",
     "dueDateWords": "May 27 at 11:59 pm",
     "points": 100,
-    "available": "2025-05-21",
-    "due": "2025-05-28",
-    "until": "2025-06-28",
+    "available": "2025-05-20",
+    "due": "2025-05-27",
+    "until": "2025-06-27",
     "description": {
       "summary": "The assignment is available online and is for Nozzle Design Project. Submit a link to the landing page of your Web application running on Netlify.",
       "requirements": [
@@ -86,9 +86,9 @@
     "availableDateWords": "May 13 at 12:00 am",
     "dueDateWords": "May 14 at 11:59 pm",
     "points": 50,
-    "available": "2025-05-06",
-    "due": "2025-05-13",
-    "until": "2025-06-13",
+    "available": "2025-05-13",
+    "due": "2025-05-14",
+    "until": "2025-06-14",
     "description": {
       "summary": "The assignment is available online and is called Aerodynamics Basics. Submit a link to the landing page of your Web application running on Netlify.",
       "requirements": [

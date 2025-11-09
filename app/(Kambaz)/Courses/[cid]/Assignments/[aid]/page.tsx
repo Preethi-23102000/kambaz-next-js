@@ -1,39 +1,6 @@
 "use client";
 
-// Function to get today's date in YYYY-MM-DD format
-const today = () => {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-};
-
-// Function to get the date one week from today in YYYY-MM-DD format,
-// just to indicate the user has not provided dur date hence setting to default 1 week timeline
-const oneWeekFromToday = () => {
-  const now = new Date();
-  now.setDate(now.getDate() + 7);
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-};
-
-// Function to get the date onw month from today in YYYY-MM-DD format approximately,
-// just to indicate the user has not provided available until hence setting to default 1 month timeline
-const oneMonthFromToday = () => {
-  const now = new Date();
-  now.setDate(now.getDate() + 30);
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-};
-
 import { useParams } from "next/navigation";
-import Link from "next/link";
-import * as db from "../../../../Database";
 import {
   FormGroup,
   FormLabel,
@@ -43,24 +10,253 @@ import {
   Row,
   Col,
   Button,
+  Card,
 } from "react-bootstrap";
 import { RxCross2 } from "react-icons/rx";
 import type { Assignment } from "../../../../Database/userDefinedTypes";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../../../store";
+import { addAssignment, updateAssignment } from "../reducer";
+import Link from "next/link";
 
+// Helper functions
+const today = () => {
+  const now = new Date();
+  return now.toISOString().split("T")[0];
+};
+
+const oneWeekFromToday = () => {
+  const now = new Date();
+  now.setDate(now.getDate() + 7);
+  return now.toISOString().split("T")[0];
+};
+
+const oneMonthFromToday = () => {
+  const now = new Date();
+  now.setDate(now.getDate() + 30);
+  return now.toISOString().split("T")[0];
+};
+
+const formatDateWords = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+};
 export default function AssignmentEditor() {
-  console.log("today() =>", today());
+  const { cid, aid } = useParams();
+  const router = useRouter();
+  const dispatch = useDispatch();
 
-  const { cid } = useParams();
-  const { aid } = useParams();
-
-  const assignments = db.assignments.filter(
-    (assignment: Assignment) => assignment.course === cid
+  // GET assignments from Redux instead of database
+  const { assignments } = useSelector(
+    (state: RootState) => state.assignmentsReducer
   );
 
-  const assignment = assignments.find(
+  // Find existing assignment
+  const existingAssignment = assignments.find(
     (assignment: Assignment) => assignment._id === aid
   );
 
+  // Check if this is editing an existing assignment
+  const isEditMode = existingAssignment !== undefined;
+
+  // CREATE state for form data
+  const [formData, setFormData] = useState<Assignment>(
+    existingAssignment || {
+      _id: aid as string,
+      title: "New Assignment",
+      course: cid as string,
+      modules: "Module 1",
+      availableDateWords: "",
+      dueDateWords: "",
+      available: today(),
+      due: oneWeekFromToday(),
+      until: oneMonthFromToday(),
+      description: {
+        summary: "New assignment description",
+        requirements: [],
+        note: "",
+      },
+      assignmentGroup: "ASSIGNMENTS",
+      displayGrade: "Percentage",
+      submissionType: "Online",
+      assignedTo: "Everyone",
+      points: 100,
+    }
+  );
+
+  //to modify disply
+  const { currentUser } = useSelector(
+    (state: RootState) => state.accountReducer
+  );
+  const isFaculty = currentUser && currentUser.role === "FACULTY";
+
+  // If assignment not found, show error
+  if (!existingAssignment && isEditMode) {
+    return (
+      <div className="container mt-5">
+        <h3>Assignment not found</h3>
+        <Link href={`/Courses/${cid}/Assignments`}>
+          <Button variant="primary">Back to Assignments</Button>
+        </Link>
+      </div>
+    );
+  }
+  // STUDENT VIEW - Read-only display
+  if (!isFaculty) {
+    return (
+      <div id="wd-assignment-view" className="container mt-4">
+        {/* Assignment Title */}
+        <h2 className="mb-4">{formData.title}</h2>
+
+        <hr />
+
+        {/* Assignment Details Card */}
+        <Card className="mb-4">
+          <Card.Body>
+            {/* Description Section */}
+            <div className="mb-4">
+              <h5 className="text-muted mb-3">Description</h5>
+              <div className="ps-3" style={{ whiteSpace: "pre-wrap" }}>
+                {formData.description.summary}
+                {formData.description.requirements.length > 0 && (
+                  <>
+                    {"\n\n"}
+                    <strong>Requirements:</strong>
+                    {formData.description.requirements.map((req, index) => (
+                      <div key={index}>• {req}</div>
+                    ))}
+                  </>
+                )}
+                {formData.description.note && (
+                  <>
+                    {"\n\n"}
+                    <em>{formData.description.note}</em>
+                  </>
+                )}
+              </div>
+            </div>
+
+            <hr />
+
+            {/* Points */}
+            <Row className="mb-3">
+              <Col xs={4} className="text-end">
+                <strong>Points:</strong>
+              </Col>
+              <Col xs={8}>{formData.points}</Col>
+            </Row>
+
+            {/* Assignment Group */}
+            <Row className="mb-3">
+              <Col xs={4} className="text-end">
+                <strong>Assignment Group:</strong>
+              </Col>
+              <Col xs={8}>{formData.assignmentGroup}</Col>
+            </Row>
+
+            {/* Display Grade As */}
+            <Row className="mb-3">
+              <Col xs={4} className="text-end">
+                <strong>Display Grade as:</strong>
+              </Col>
+              <Col xs={8}>{formData.displayGrade}</Col>
+            </Row>
+
+            {/* Submission Type */}
+            <Row className="mb-3">
+              <Col xs={4} className="text-end">
+                <strong>Submission Type:</strong>
+              </Col>
+              <Col xs={8}>{formData.submissionType}</Col>
+            </Row>
+
+            <hr />
+
+            {/* Assignment Dates Section */}
+            <div className="p-3 rounded">
+              <h6 className="mb-3">Important Dates</h6>
+
+              {/* Due Date */}
+              <Row className="mb-2">
+                <Col xs={4} className="text-end">
+                  <strong>Due:</strong>
+                </Col>
+                <Col xs={8}>
+                  <span>
+                    {new Date(formData.due).toLocaleDateString("en-US", {
+                      weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </span>
+                  {" at 11:59pm"}
+                </Col>
+              </Row>
+
+              {/* Available From */}
+              <Row className="mb-2">
+                <Col xs={4} className="text-end">
+                  <strong>Available from:</strong>
+                </Col>
+                <Col xs={8}>
+                  {new Date(formData.available).toLocaleDateString("en-US", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </Col>
+              </Row>
+
+              {/* Until */}
+              <Row className="mb-2">
+                <Col xs={4} className="text-end">
+                  <strong>Until:</strong>
+                </Col>
+                <Col xs={8}>
+                  {new Date(formData.until).toLocaleDateString("en-US", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </Col>
+              </Row>
+            </div>
+
+            {/* Assigned To */}
+            <Row className="mt-3">
+              <Col xs={4} className="text-end">
+                <strong>Assigned to:</strong>
+              </Col>
+              <Col xs={8}>{formData.assignedTo}</Col>
+            </Row>
+          </Card.Body>
+        </Card>
+
+        {/* Action Buttons for Students */}
+        <div className="d-flex gap-2 mb-5">
+          <Button variant="primary" size="lg">
+            Submit Assignment
+          </Button>
+          <Link href={`/Courses/${cid}/Assignments`}>
+            <Button variant="outline-secondary" size="lg">
+              Back to Assignments
+            </Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // FACULTY VIEW - Editable form
   return (
     <div id="wd-assignments-editor">
       <FormGroup
@@ -69,39 +265,35 @@ export default function AssignmentEditor() {
       >
         <FormLabel>Assignment Name</FormLabel>
         <FormControl
-          defaultValue={assignment ? assignment.title : "No title Provided"}
+          value={formData.title}
+          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+          placeholder="Enter assignment name"
         />
       </FormGroup>
 
-      <FormGroup className="mb-3" controlId="wd-textarea">
-        <FormControl
-          as="textarea"
-          rows={10}
-          cols={50}
-          defaultValue={
-            assignment //using nexted ternary operators to check for existence of description, summary, requirements, and note
-              ? assignment.description
-                ? `${
-                    assignment.description.summary
-                      ? assignment.description.summary
-                      : "No summary provided."
-                  }\n\n${
-                    assignment.description.requirements &&
-                    assignment.description.requirements.length > 0
-                      ? "The landing page should include the following:\n- " +
-                        assignment.description.requirements.join("\n- ") +
-                        "\n\n"
-                      : "No requirements provided.\n\n"
-                  }${
-                    assignment.description.note
-                      ? assignment.description.note
-                      : "No note provided."
-                  }`
-                : "No description provided."
-              : "No assignment found."
-          }
-        />
-      </FormGroup>
+      <FormControl
+        as="textarea"
+        rows={10}
+        value={
+          formData.description.summary +
+          (formData.description.requirements.length > 0
+            ? "\n\n" +
+              formData.description.requirements.map((r) => `- ${r}`).join("\n")
+            : "") +
+          (formData.description.note ? "\n\n" + formData.description.note : "")
+        }
+        onChange={(e) => {
+          // Simple version: just store as summary
+          setFormData({
+            ...formData,
+            description: {
+              ...formData.description,
+              summary: e.target.value,
+            },
+          });
+        }}
+        placeholder="Enter assignment description"
+      />
 
       <FormGroup className="mb-3" controlId="wd-points">
         <Row>
@@ -114,9 +306,14 @@ export default function AssignmentEditor() {
 
           <Col xs={8}>
             <FormControl
+              type="number"
               className="margin-bottom-15 margin-top-15"
-              defaultValue={
-                assignment ? (assignment.points ? assignment.points : 0) : 0
+              value={formData.points}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  points: parseInt(e.target.value) || 0,
+                })
               }
             />
           </Col>
@@ -133,12 +330,9 @@ export default function AssignmentEditor() {
 
           <Col xs={8} className=" margin-bottom-15 margin-top-15">
             <FormSelect
-              defaultValue={
-                assignment
-                  ? assignment.assignmentGroup
-                    ? assignment.assignmentGroup
-                    : "none"
-                  : "none"
+              value={formData.assignmentGroup}
+              onChange={(e) =>
+                setFormData({ ...formData, assignmentGroup: e.target.value })
               }
             >
               <option value="none" disabled>
@@ -163,12 +357,9 @@ export default function AssignmentEditor() {
 
           <Col xs={8} className="margin-bottom-15 margin-top-15">
             <FormSelect
-              defaultValue={
-                assignment
-                  ? assignment.displayGrade
-                    ? assignment.displayGrade
-                    : "none"
-                  : "none"
+              value={formData.displayGrade}
+              onChange={(e) =>
+                setFormData({ ...formData, displayGrade: e.target.value })
               }
             >
               <option value="none" disabled>
@@ -194,12 +385,9 @@ export default function AssignmentEditor() {
             <div className="border-round">
               <FormSelect
                 className="margin-bottom-15 margin-top-15"
-                defaultValue={
-                  assignment
-                    ? assignment.submissionType
-                      ? assignment.submissionType
-                      : "none"
-                    : "none"
+                value={formData.submissionType}
+                onChange={(e) =>
+                  setFormData({ ...formData, submissionType: e.target.value })
                 }
               >
                 <option value="none" disabled>
@@ -256,11 +444,7 @@ export default function AssignmentEditor() {
               <b>Assign to</b>
               <div className="border-round margin-bottom-15 ">
                 <span className="solid-grey">
-                  {assignment
-                    ? assignment.assignedTo
-                      ? assignment.assignedTo
-                      : "Not Assigned"
-                    : "Not Assigned"}
+                  {formData.assignedTo}
                   <RxCross2 className="margin-left-15 justify-content-end" />
                 </span>
               </div>
@@ -270,12 +454,9 @@ export default function AssignmentEditor() {
                   <div className="margin-bottom-15">
                     <FormControl
                       type="date"
-                      value={
-                        assignment
-                          ? assignment.due && assignment.due !== ""
-                            ? assignment.due
-                            : oneWeekFromToday()
-                          : oneWeekFromToday()
+                      value={formData.due}
+                      onChange={(e) =>
+                        setFormData({ ...formData, due: e.target.value })
                       }
                     />
                   </div>
@@ -288,12 +469,9 @@ export default function AssignmentEditor() {
                   <div className="margin-bottom-15">
                     <FormControl
                       type="date"
-                      value={
-                        assignment
-                          ? assignment.available && assignment.available !== ""
-                            ? assignment.available
-                            : today()
-                          : today()
+                      value={formData.available}
+                      onChange={(e) =>
+                        setFormData({ ...formData, available: e.target.value })
                       }
                     />
                   </div>
@@ -303,12 +481,9 @@ export default function AssignmentEditor() {
                   <div className="margin-bottom-15">
                     <FormControl
                       type="date"
-                      value={
-                        assignment
-                          ? assignment.until && assignment.until !== ""
-                            ? assignment.until
-                            : oneMonthFromToday()
-                          : oneMonthFromToday()
+                      value={formData.until}
+                      onChange={(e) =>
+                        setFormData({ ...formData, until: e.target.value })
                       }
                     />
                   </div>
@@ -319,25 +494,48 @@ export default function AssignmentEditor() {
         </Row>
       </FormGroup>
       <hr />
-      <Link href={`/Courses/${cid}/Assignments`}>
-        <Button
-          variant="danger"
-          id="wd-save-assignment-btn"
-          className="text-nowrap float-end assignment-btns"
-        >
-          Save
-        </Button>
-      </Link>
 
-      <Link href={`/Courses/${cid}/Assignments`}>
-        <Button
-          variant="secondary"
-          id="wd-cancel-assignment-btn"
-          className="text-nowrap float-end assignment-btns"
-        >
-          Cancel
-        </Button>
-      </Link>
+      <Button
+        variant="danger"
+        id="wd-save-assignment-btn"
+        className="text-nowrap float-end assignment-btns"
+        onClick={() => {
+          // Format date words for display
+          const updatedFormData = {
+            ...formData,
+            availableDateWords: new Date(formData.available).toLocaleDateString(
+              "en-US",
+              {
+                month: "short",
+                day: "numeric",
+              }
+            ),
+            dueDateWords: new Date(formData.due).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+            }),
+          };
+
+          if (isEditMode) {
+            dispatch(updateAssignment(updatedFormData));
+          } else {
+            dispatch(addAssignment(updatedFormData));
+          }
+
+          router.push(`/Courses/${cid}/Assignments`);
+        }}
+      >
+        Save
+      </Button>
+
+      <Button
+        variant="secondary"
+        id="wd-cancel-assignment-btn"
+        className="text-nowrap float-end assignment-btns me-2"
+        onClick={() => router.push(`/Courses/${cid}/Assignments`)}
+      >
+        Cancel
+      </Button>
     </div>
   );
 }
