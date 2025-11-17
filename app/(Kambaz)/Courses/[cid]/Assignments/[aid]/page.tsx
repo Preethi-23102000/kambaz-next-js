@@ -41,6 +41,15 @@ const oneMonthFromToday = () => {
   return now.toISOString().split("T")[0];
 };
 
+const formatDateWordsLocal = (dateString: string) => {
+  const [year, month, day] = dateString.split("-");
+  const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+};
+
 export default function AssignmentEditor() {
   // const { cid, aid } = useParams();
 
@@ -71,8 +80,8 @@ export default function AssignmentEditor() {
       title: "New Assignment",
       course: cid as string,
       modules: "Module 1",
-      availableDateWords: "",
-      dueDateWords: "",
+      availableDateWords: formatDateWordsLocal(today()),
+      dueDateWords: formatDateWordsLocal(oneWeekFromToday()),
       available: today(),
       due: oneWeekFromToday(),
       until: oneMonthFromToday(),
@@ -544,20 +553,6 @@ export default function AssignmentEditor() {
         id="wd-save-assignment-btn"
         className="text-nowrap float-end assignment-btns"
         onClick={() => {
-          // Helper to format date without timezone issues
-          const formatDateWordsLocal = (dateString: string) => {
-            const [year, month, day] = dateString.split("-");
-            const date = new Date(
-              parseInt(year),
-              parseInt(month) - 1,
-              parseInt(day)
-            );
-            return date.toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-            });
-          };
-
           // Format date words for display
           const updatedAssignmentData = {
             ...assignmentData,
