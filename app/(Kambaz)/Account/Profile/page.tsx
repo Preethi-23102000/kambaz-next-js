@@ -4,6 +4,9 @@ import { redirect } from "next/dist/client/components/navigation";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser } from "../reducer";
+
+import * as client from "../client";
+
 import {
   FormControl,
   FormGroup,
@@ -24,14 +27,26 @@ export default function Profile() {
     if (!currentUser) return redirect("/Account/Signin");
     setProfile(currentUser);
   };
-  const signout = () => {
+  // const signout = () => {
+  //   dispatch(setCurrentUser(null));
+  //   persistor.purge();
+  //   redirect("/Account/Signin");
+  // };
+
+  const signout = async () => {
+    await client.signout();
     dispatch(setCurrentUser(null));
-    persistor.purge();
     redirect("/Account/Signin");
   };
+
   useEffect(() => {
     fetchProfile();
   }, []);
+
+  const updateProfile = async () => {
+    const updatedProfile = await client.updateUser(profile);
+    dispatch(setCurrentUser(updatedProfile));
+  };
 
   return (
     <div id="wd-profile-screen">
@@ -126,6 +141,13 @@ export default function Profile() {
                 <option value="FACULTY">Faculty</option>
                 <option value="STUDENT">Student</option>
               </select>
+              <button
+                onClick={updateProfile}
+                className="btn btn-primary w-100 mb-2"
+              >
+                Update
+              </button>
+
               <Button
                 onClick={signout}
                 className="w-100 mb-2"
@@ -133,16 +155,6 @@ export default function Profile() {
               >
                 Sign out
               </Button>
-
-              {/* <Link href="Signin" className="text-white">
-            <Button
-              variant="primary"
-              id="wd-signin-btn"
-              className="text-nowrap float-end account-btns"
-            >
-              Sign Out
-            </Button>
-          </Link> */}
             </Col>
           </Row>
         </div>

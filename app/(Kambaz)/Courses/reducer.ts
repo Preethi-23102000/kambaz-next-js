@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { courses } from "../Database";
 import { v4 as uuidv4 } from "uuid";
-import { enrollUser } from "../Enrollments/reducer";
+import { addEnrollment } from "../Enrollments/reducer";
 
 const initialState = {
- courses: courses,
+  courses: [] as any[],
 };
 const coursesSlice = createSlice({
  name: "courses",
@@ -25,9 +24,12 @@ const coursesSlice = createSlice({
        c._id === course._id ? course : c
      ) as any;
    },
+   setCourses: (state, action) => {
+     state.courses = action.payload;
+   },
  },
 });
-export const { addNewCourse, deleteCourse, updateCourse } =
+export const { addNewCourse, deleteCourse, updateCourse, setCourses } =
  coursesSlice.actions;
 
  export const addCourseAndEnrollFaculty = (course: any) =>
@@ -38,7 +40,7 @@ export const { addNewCourse, deleteCourse, updateCourse } =
     dispatch(addNewCourse(newCourse));
 
     const currentUser = getState().accountReducer.currentUser;
-    dispatch(enrollUser({
+    dispatch(addEnrollment({
       userId: currentUser._id,
       courseId: courseId,
     }));

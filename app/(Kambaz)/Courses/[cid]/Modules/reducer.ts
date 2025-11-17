@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { modules } from "../../../Database";
 import { v4 as uuidv4 } from "uuid";
 const initialState = {
-  modules: modules,
+  modules: [] as any[],
 };
 const modulesSlice = createSlice({
   name: "modules",
@@ -31,6 +30,11 @@ const modulesSlice = createSlice({
         m._id === moduleId ? { ...m, editing: true } : m
       ) as any;
     },
+
+     setModules: (state, action) => {
+      state.modules = action.payload;
+    },
+
 // --- NEW: lesson-level reducers ---
     addLesson: (state, { payload }: { payload: { moduleId: string; name: string } }) => {
       state.modules = state.modules.map((m: any) =>
@@ -94,7 +98,7 @@ const modulesSlice = createSlice({
   },
 });
 
-export const { addModule, deleteModule, updateModule, editModule,addLesson,
+export const { addModule, deleteModule, updateModule, setModules, editModule,addLesson,
   deleteLesson,
   editLesson,
   updateLesson, } =

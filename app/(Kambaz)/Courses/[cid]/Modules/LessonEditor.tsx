@@ -14,7 +14,7 @@ export default function LessonEditor({
   dialogTitle: string;
   lessonName: string;
   setLessonName: (name: string) => void;
-  onSave: () => void; // will call addLesson()
+  onSave: () => Promise<void>;
 }) {
   return (
     <Modal show={show} onHide={handleClose}>
@@ -34,8 +34,8 @@ export default function LessonEditor({
         </Button>
         <Button
           variant="primary"
-          onClick={() => {
-            onSave();
+          onClick={async () => {
+            await onSave();
             handleClose();
           }}
         >
