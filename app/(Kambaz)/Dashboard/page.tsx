@@ -173,15 +173,20 @@ export default function Dashboard() {
           <FormControl
             value={course.name}
             className="mb-2"
+            title="Course Name"
+            placeholder="Course Name"
             onChange={(e) => setCourse({ ...course, name: e.target.value })}
           />
           <FormControl
             value={course.number}
+            title="Course Number"
+            placeholder="Course Number"
             className="mb-2"
             onChange={(e) => setCourse({ ...course, number: e.target.value })}
           />
           <FormControl
             type="date"
+            title="Course Start Date"
             value={course.startDate || new Date().toISOString().split("T")[0]}
             className="mb-2"
             onChange={(e) =>
@@ -191,6 +196,7 @@ export default function Dashboard() {
           />
           <FormControl
             type="date"
+            title="Course End Date"
             value={
               course.endDate ||
               new Date(Date.now() + 24 * 60 * 60 * 1000)
@@ -203,6 +209,8 @@ export default function Dashboard() {
           />
           <FormControl
             value={course.department}
+            title="Course Department"
+            placeholder="Course Department"
             className="mb-2"
             onChange={(e) =>
               setCourse({ ...course, department: e.target.value })
@@ -211,6 +219,8 @@ export default function Dashboard() {
           <FormControl
             type="number"
             value={course.credits}
+            title="Course Credits"
+            placeholder="Course Credits"
             className="mb-2"
             onChange={(e) =>
               setCourse({ ...course, credits: parseInt(e.target.value) })
@@ -219,6 +229,8 @@ export default function Dashboard() {
           <FormControl
             as="textarea"
             value={course.description}
+            title="Course Description"
+            placeholder="Course Description"
             rows={3}
             className="mb-2"
             onChange={(e) =>

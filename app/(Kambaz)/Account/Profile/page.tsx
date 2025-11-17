@@ -17,6 +17,12 @@ import {
   FormSelect,
 } from "react-bootstrap";
 import { RootState, persistor } from "../../store";
+
+const today = () => {
+  const now = new Date();
+  return now.toISOString().split("T")[0];
+};
+
 export default function Profile() {
   const [profile, setProfile] = useState<any>({});
   const dispatch = useDispatch();
@@ -63,6 +69,8 @@ export default function Profile() {
                   id="wd-username"
                   className="mb-2"
                   defaultValue={profile.username}
+                  title="Username"
+                  placeholder="Username"
                   onChange={(e) =>
                     setProfile({ ...profile, username: e.target.value })
                   }
@@ -75,6 +83,8 @@ export default function Profile() {
                 <FormControl
                   id="wd-password"
                   className="mb-2"
+                  title="Password"
+                  placeholder="Password"
                   defaultValue={profile.password}
                   onChange={(e) =>
                     setProfile({ ...profile, password: e.target.value })
@@ -89,6 +99,8 @@ export default function Profile() {
                   id="wd-firstname"
                   className="mb-2"
                   defaultValue={profile.firstName}
+                  title="First Name"
+                  placeholder="First Name"
                   onChange={(e) =>
                     setProfile({ ...profile, firstName: e.target.value })
                   }
@@ -100,6 +112,8 @@ export default function Profile() {
               >
                 <FormControl
                   id="wd-lastname"
+                  title="Last Name"
+                  placeholder="Last Name"
                   className="mb-2"
                   defaultValue={profile.lastName}
                   onChange={(e) =>
@@ -112,6 +126,7 @@ export default function Profile() {
                 id="wd-dob"
                 className="mb-2"
                 type="date"
+                title="Date of Birth"
                 value={profile.dob ? profile.dob.substring(0, 10) : ""}
                 onChange={(e) =>
                   setProfile({ ...profile, dob: e.target.value })
@@ -122,6 +137,8 @@ export default function Profile() {
                 <FormControl
                   id="wd-email"
                   className="mb-2"
+                  title="Email"
+                  placeholder="Email"
                   defaultValue={profile.email}
                   onChange={(e) =>
                     setProfile({ ...profile, email: e.target.value })
@@ -131,6 +148,7 @@ export default function Profile() {
               <select
                 className="form-control mb-2"
                 id="wd-role"
+                title="Role"
                 value={profile.role || "USER"}
                 onChange={(e) =>
                   setProfile({ ...profile, role: e.target.value })
