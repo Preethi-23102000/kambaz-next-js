@@ -81,7 +81,11 @@ export default function Dashboard() {
   }, [currentUser, showAllCourses]);
 
   const onAddNewCourse = async () => {
-    const newCourse = await client.createCourse(course);
+    const courseToCreate = {
+      ...course,
+      image: course.image || "/images/reactjs.jpg",
+    };
+    const newCourse = await client.createCourse(courseToCreate);
     dispatch(setCourses([...courses, newCourse]));
   };
 
