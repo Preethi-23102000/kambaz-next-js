@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { FormControl } from "react-bootstrap";
 import { useParams } from "next/navigation";
-import PeopleTable from "../../Courses/[cid]/People/Table/page";
+import PeopleTable from "../../Courses/[cid]/People/Table";
 import { FaPlus } from "react-icons/fa6";
 
 import * as client from "../client";

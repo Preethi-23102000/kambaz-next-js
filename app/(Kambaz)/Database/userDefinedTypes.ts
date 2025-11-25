@@ -10,7 +10,7 @@ export interface AssignmentDescription {
 }
 
 export interface Assignment {
-  _id: string;
+  _id?: string;
   title: string;
   course: string;
   modules: string;

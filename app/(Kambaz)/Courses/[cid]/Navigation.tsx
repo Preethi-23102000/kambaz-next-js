@@ -23,11 +23,7 @@ export default function CourseNavigation() {
           <ListGroupItem
             key={link}
             as={Link}
-            href={`${
-              link === "People"
-                ? `/Courses/${cid}/${link}/Table`
-                : `/Courses/${cid}/${link}`
-            }`}
+            href={`/Courses/${cid}/${link}`}
             className={`list-group-item 
               ${pathname.includes(link) ? "active" : "text-danger"} border-0`}
           >

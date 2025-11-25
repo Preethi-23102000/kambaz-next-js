@@ -55,9 +55,13 @@ export default function Modules() {
     if (!targetModuleId || !newLessonName.trim()) return;
 
     try {
-      const newLesson = await client.createLessonForModule(targetModuleId, {
-        name: newLessonName.trim(),
-      });
+      const newLesson = await client.createLessonForModule(
+        cid,
+        targetModuleId,
+        {
+          name: newLessonName.trim(),
+        }
+      );
 
       await fetchModules();
 
@@ -89,12 +93,12 @@ export default function Modules() {
   };
 
   const onRemoveModule = async (moduleId: string) => {
-    await client.deleteModule(moduleId);
+    await client.deleteModule(cid, moduleId);
     dispatch(setModules(modules.filter((m: any) => m._id !== moduleId)));
   };
 
   const onUpdateModule = async (module: any) => {
-    await client.updateModule(module);
+    await client.updateModule(cid, module);
     const newModules = modules.map((m: any) =>
       m._id === module._id ? module : m
     );
@@ -213,7 +217,7 @@ export default function Modules() {
                               );
                             }}
                             onDelete={async (mid, lid) => {
-                              await client.deleteLesson(mid, lid);
+                              await client.deleteLesson(cid, mid, lid);
                               dispatch(
                                 deleteLesson({ moduleId: mid, lessonId: lid })
                               );

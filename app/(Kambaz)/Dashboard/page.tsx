@@ -117,16 +117,18 @@ export default function Dashboard() {
     );
   };
 
-  // Function to handle enroll/unenroll
   const handleEnrollment = async (courseId: string, enroll: boolean) => {
     if (!currentUser) return;
 
     try {
       if (enroll) {
-        const enrollment = await client.enrollInCourse(courseId);
+        const enrollment = await client.enrollIntoCourse(
+          currentUser._id,
+          courseId
+        );
         dispatch(addEnrollment(enrollment));
       } else {
-        await client.unenrollFromCourse(courseId);
+        await client.unenrollFromCourse(currentUser._id, courseId);
         dispatch(removeEnrollment({ userId: currentUser._id, courseId }));
       }
     } catch (error) {

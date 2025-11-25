@@ -13,7 +13,7 @@ import AssignmentControlButtons from "./AssignmentControlButtons";
 import type { Assignment } from "../../../Database/userDefinedTypes";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { deleteAssignment, setAssignments } from "./reducer";
+import { setAssignments } from "./reducer";
 import { useDispatch } from "react-redux";
 import * as client from "../../client";
 import { useEffect } from "react";
@@ -38,15 +38,14 @@ export default function Assignments() {
     const assignments = await client.findAssignmentsForCourse(cid as string);
     dispatch(setAssignments(assignments));
   };
+
   useEffect(() => {
     fetchAssignments();
   }, []);
 
   const onDeleteAssignment = async (assignmentId: string) => {
     await client.deleteAssignments(assignmentId);
-    dispatch(
-      setAssignments(assignments.filter((a: any) => a._id !== assignmentId))
-    );
+    await fetchAssignments();
   };
 
   return (
