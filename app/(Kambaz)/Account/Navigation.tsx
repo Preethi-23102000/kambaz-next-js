@@ -28,6 +28,17 @@ export default function AccountNavigation() {
           {link}
         </ListGroupItem>
       ))}
+
+      {currentUser && currentUser.role === "ADMIN" && (
+        <ListGroupItem
+          as={Link}
+          href={`/Account/Users`}
+          active={pathname.endsWith("Users")}
+          className="border-0 "
+        >
+          Users
+        </ListGroupItem>
+      )}
     </ListGroup>
   );
 }

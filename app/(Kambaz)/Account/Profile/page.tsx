@@ -4,6 +4,9 @@ import { redirect } from "next/dist/client/components/navigation";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser } from "../reducer";
+
+import * as client from "../client";
+
 import {
   FormControl,
   FormGroup,
@@ -14,6 +17,12 @@ import {
   FormSelect,
 } from "react-bootstrap";
 import { RootState, persistor } from "../../store";
+
+const today = () => {
+  const now = new Date();
+  return now.toISOString().split("T")[0];
+};
+
 export default function Profile() {
   const [profile, setProfile] = useState<any>({});
   const dispatch = useDispatch();
@@ -24,14 +33,26 @@ export default function Profile() {
     if (!currentUser) return redirect("/Account/Signin");
     setProfile(currentUser);
   };
-  const signout = () => {
+  // const signout = () => {
+  //   dispatch(setCurrentUser(null));
+  //   persistor.purge();
+  //   redirect("/Account/Signin");
+  // };
+
+  const signout = async () => {
+    await client.signout();
     dispatch(setCurrentUser(null));
-    persistor.purge();
     redirect("/Account/Signin");
   };
+
   useEffect(() => {
     fetchProfile();
   }, []);
+
+  const updateProfile = async () => {
+    const updatedProfile = await client.updateUser(profile);
+    dispatch(setCurrentUser(updatedProfile));
+  };
 
   return (
     <div id="wd-profile-screen">
@@ -48,6 +69,8 @@ export default function Profile() {
                   id="wd-username"
                   className="mb-2"
                   defaultValue={profile.username}
+                  title="Username"
+                  placeholder="Username"
                   onChange={(e) =>
                     setProfile({ ...profile, username: e.target.value })
                   }
@@ -60,6 +83,8 @@ export default function Profile() {
                 <FormControl
                   id="wd-password"
                   className="mb-2"
+                  title="Password"
+                  placeholder="Password"
                   defaultValue={profile.password}
                   onChange={(e) =>
                     setProfile({ ...profile, password: e.target.value })
@@ -74,6 +99,8 @@ export default function Profile() {
                   id="wd-firstname"
                   className="mb-2"
                   defaultValue={profile.firstName}
+                  title="First Name"
+                  placeholder="First Name"
                   onChange={(e) =>
                     setProfile({ ...profile, firstName: e.target.value })
                   }
@@ -85,6 +112,8 @@ export default function Profile() {
               >
                 <FormControl
                   id="wd-lastname"
+                  title="Last Name"
+                  placeholder="Last Name"
                   className="mb-2"
                   defaultValue={profile.lastName}
                   onChange={(e) =>
@@ -97,6 +126,7 @@ export default function Profile() {
                 id="wd-dob"
                 className="mb-2"
                 type="date"
+                title="Date of Birth"
                 value={profile.dob ? profile.dob.substring(0, 10) : ""}
                 onChange={(e) =>
                   setProfile({ ...profile, dob: e.target.value })
@@ -107,6 +137,8 @@ export default function Profile() {
                 <FormControl
                   id="wd-email"
                   className="mb-2"
+                  title="Email"
+                  placeholder="Email"
                   defaultValue={profile.email}
                   onChange={(e) =>
                     setProfile({ ...profile, email: e.target.value })
@@ -116,6 +148,7 @@ export default function Profile() {
               <select
                 className="form-control mb-2"
                 id="wd-role"
+                title="Role"
                 value={profile.role || "USER"}
                 onChange={(e) =>
                   setProfile({ ...profile, role: e.target.value })
@@ -126,6 +159,13 @@ export default function Profile() {
                 <option value="FACULTY">Faculty</option>
                 <option value="STUDENT">Student</option>
               </select>
+              <button
+                onClick={updateProfile}
+                className="btn btn-primary w-100 mb-2"
+              >
+                Update
+              </button>
+
               <Button
                 onClick={signout}
                 className="w-100 mb-2"
@@ -133,16 +173,6 @@ export default function Profile() {
               >
                 Sign out
               </Button>
-
-              {/* <Link href="Signin" className="text-white">
-            <Button
-              variant="primary"
-              id="wd-signin-btn"
-              className="text-nowrap float-end account-btns"
-            >
-              Sign Out
-            </Button>
-          </Link> */}
             </Col>
           </Row>
         </div>
