@@ -13,7 +13,7 @@ import {
   Card,
 } from "react-bootstrap";
 import { RxCross2 } from "react-icons/rx";
-import type { Assignment } from "../../../../Database/userDefinedTypes";
+import type { newAssignment } from "../../../../Database/userDefinedTypes";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -59,7 +59,7 @@ export default function AssignmentEditor() {
   );
   const isFaculty = currentUser && currentUser.role === "FACULTY";
 
-  const [assignment, setAssignment] = useState<Assignment>({
+  const [assignment, setAssignment] = useState<newAssignment>({
     title: "New Assignment",
     course: cid,
     modules: "Multiple Modules",

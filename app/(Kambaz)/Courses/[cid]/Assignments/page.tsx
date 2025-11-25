@@ -69,54 +69,57 @@ export default function Assignments() {
             </div>
           ) : (
             <ListGroup className="wd-assignment-list rounded-0">
-              {courseAssignments.map((assignment: Assignment) => (
-                <ListGroupItem
-                  key={assignment._id}
-                  className="wd-assignment-list-item p-3 ps-1"
-                >
-                  <Row>
-                    <Link
-                      href={`/Courses/${cid}/Assignments/${assignment._id}`}
-                      className="wd-assignment-link"
-                    >
-                      <div className="d-flex align-items-center flex-row">
-                        <Col xs={2} md={1} className="text-nowrap me-2">
-                          <BsGripVertical className="me-2 fs-3 align-center" />
-                          <MdEditNote className="me-2 fs-3 align-center font-green" />
-                        </Col>
+              {courseAssignments
+                .filter((assignment: Assignment) => assignment._id)
+                .map((assignment: Assignment) => (
+                  <ListGroupItem
+                    key={assignment._id}
+                    className="wd-assignment-list-item p-3 ps-1"
+                  >
+                    <Row>
+                      <Link
+                        href={`/Courses/${cid}/Assignments/${assignment._id}`}
+                        className="wd-assignment-link"
+                      >
+                        <div className="d-flex align-items-center flex-row">
+                          <Col xs={2} md={1} className="text-nowrap me-2">
+                            <BsGripVertical className="me-2 fs-3 align-center" />
+                            <MdEditNote className="me-2 fs-3 align-center font-green" />
+                          </Col>
 
-                        <Col xs={8} md={9}>
-                          <p className="bold-fs mb-0">{assignment.title}</p>
+                          <Col xs={8} md={9}>
+                            <p className="bold-fs mb-0">{assignment.title}</p>
 
-                          <p className="assignment-details mb-0">
-                            <span className="assignment-details font-red">
-                              {assignment.modules}
-                            </span>
-                            | <b>Not available until </b>
-                            {assignment.availableDateWords} |
-                          </p>
+                            <p className="assignment-details mb-0">
+                              <span className="assignment-details font-red">
+                                {assignment.modules}
+                              </span>
+                              | <b>Not available until </b>
+                              {assignment.availableDateWords} |
+                            </p>
 
-                          <p className="assignment-details mb-0">
-                            <b>Due </b>
-                            {assignment.dueDateWords} | {assignment.points} pts
-                          </p>
-                        </Col>
-                      </div>
-                    </Link>
+                            <p className="assignment-details mb-0">
+                              <b>Due </b>
+                              {assignment.dueDateWords} | {assignment.points}{" "}
+                              pts
+                            </p>
+                          </Col>
+                        </div>
+                      </Link>
 
-                    <Col xs={1}>
-                      <span className="text-nowrap align-text-right align-center-2">
-                        {isFaculty && (
-                          <SingleAssignemntControlButtons
-                            assignmentId={assignment._id}
-                            deleteAssignment={onDeleteAssignment}
-                          />
-                        )}
-                      </span>
-                    </Col>
-                  </Row>
-                </ListGroupItem>
-              ))}
+                      <Col xs={1}>
+                        <span className="text-nowrap align-text-right align-center-2">
+                          {isFaculty && (
+                            <SingleAssignemntControlButtons
+                              assignmentId={assignment._id}
+                              deleteAssignment={onDeleteAssignment}
+                            />
+                          )}
+                        </span>
+                      </Col>
+                    </Row>
+                  </ListGroupItem>
+                ))}
             </ListGroup>
           )}
         </ListGroupItem>

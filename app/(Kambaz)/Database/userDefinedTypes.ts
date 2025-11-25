@@ -5,7 +5,24 @@ export interface AssignmentDescription {
 }
 
 export interface Assignment {
-  _id?: string;
+  _id: string;
+  title: string;
+  course: string;
+  modules: string;
+  availableDateWords: string;
+  dueDateWords: string;
+  available: string;  
+  due: string;        
+  until: string;   
+  description: AssignmentDescription;
+  assignmentGroup: string;
+  displayGrade: string;
+  submissionType: string;
+  assignedTo: string;
+  points: number;
+}
+
+export interface newAssignment {
   title: string;
   course: string;
   modules: string;
