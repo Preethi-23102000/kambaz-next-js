@@ -19,18 +19,15 @@ export default function RouteGuard({
   );
 
   useEffect(() => {
-    // Redirect to login if not logged in
     if (!currentUser) {
       router.push("/Account/Signin");
       return;
     }
 
-    // Faculty can access any course
     if (currentUser.role === "FACULTY") {
       return;
     }
 
-    // Check if student/other user is enrolled in this course
     const isEnrolled = enrollments.some(
       (enrollment: any) =>
         enrollment.user === currentUser._id && enrollment.course === cid
@@ -42,7 +39,6 @@ export default function RouteGuard({
     }
   }, [currentUser, enrollments, cid, router]);
 
-  // Show loading or the protected content
   if (!currentUser) {
     return <div>Redirecting to login...</div>;
   }

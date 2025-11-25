@@ -1,4 +1,3 @@
-// app/Courses/LessonEditor.tsx
 import { Modal, FormControl, Button } from "react-bootstrap";
 
 export default function LessonEditor({

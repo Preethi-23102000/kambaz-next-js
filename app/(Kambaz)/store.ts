@@ -9,7 +9,6 @@ import accountReducer from "./Account/reducer";
 import assignmentsReducer from "./Courses/[cid]/Assignments/reducer";
 import enrollmentsReducer from "./Enrollments/reducer";
 
-// Combine all reducers
 const rootReducer = combineReducers({
   coursesReducer,
   modulesReducer,
@@ -18,7 +17,6 @@ const rootReducer = combineReducers({
   enrollmentsReducer,
 });
 
-// Persist config
 const persistConfig = {
   key: 'kambaz-app',
   storage,

@@ -22,7 +22,7 @@ export default function CoursesLayout({ children }: { children: ReactNode }) {
           <FaAlignJustify
             className="me-4 fs-4 mb-1 cursor-pointer"
             style={{ cursor: "pointer" }}
-            onClick={() => setShowNav(!showNav)} // toggle sidebar
+            onClick={() => setShowNav(!showNav)}
             title={showNav ? "Hide Navigation" : "Show Navigation"}
           />
           <Breadcrumb course={course} />
@@ -30,7 +30,6 @@ export default function CoursesLayout({ children }: { children: ReactNode }) {
         <hr />
         <div className="d-flex">
           <div className="d-none d-md-block">
-            {/* <CourseNavigation /> */}
             {showNav && (
               <div className="d-none d-md-block">
                 <CourseNavigation />

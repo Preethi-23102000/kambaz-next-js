@@ -4,7 +4,7 @@ const axiosWithCredentials = axios.create({ withCredentials: true });
 const USERS_API = `${HTTP_SERVER}/api/users`;
 const COURSES_API = `${HTTP_SERVER}/api/courses`;
 
-
+// Courses
 export const fetchAllCourses = async () => {
   const { data } = await axios.get(COURSES_API);
   return data;

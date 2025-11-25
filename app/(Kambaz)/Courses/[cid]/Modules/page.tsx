@@ -35,7 +35,6 @@ export default function Modules() {
     (state: RootState) => state.accountReducer
   );
 
-  // const { cid } = useParams();
   const params = useParams();
   const cid = Array.isArray(params.cid) ? params.cid[0] : params.cid || "";
   const dispatch = useDispatch();
@@ -124,11 +123,9 @@ export default function Modules() {
                 key={module._id}
                 className="wd-module p-0 mb-5 fs-5 border-gray"
               >
-                {/* -------- Module Header -------- */}
                 <div className="wd-title p-3 ps-2 bg-secondary">
                   <BsGripVertical className="me-2 fs-3" />
 
-                  {/* Inline module edit */}
                   {!module.editing && module.name}
                   {module.editing && (
                     <FormControl
@@ -147,8 +144,6 @@ export default function Modules() {
                     />
                   )}
 
-                  {/* Module control buttons */}
-
                   {isFaculty && (
                     <ModuleControlButtons
                       moduleId={module._id}
@@ -157,7 +152,6 @@ export default function Modules() {
                     />
                   )}
 
-                  {/* Add lesson button */}
                   {isFaculty && (
                     <Button
                       size="sm"
@@ -169,7 +163,6 @@ export default function Modules() {
                   )}
                 </div>
 
-                {/* -------- Lessons List -------- */}
                 {module.lessons && (
                   <ListGroup className="wd-lessons rounded-0">
                     {module.lessons.map((lesson: Lesson) => (
@@ -179,7 +172,6 @@ export default function Modules() {
                       >
                         <BsGripVertical className="me-2 fs-3" />
 
-                        {/* Inline lesson edit */}
                         {!lesson.editing && lesson.name}
                         {lesson.editing && (
                           <FormControl
@@ -206,7 +198,6 @@ export default function Modules() {
                           />
                         )}
 
-                        {/* Lesson control buttons */}
                         {isFaculty && (
                           <LessonControlButtons
                             moduleId={module._id}

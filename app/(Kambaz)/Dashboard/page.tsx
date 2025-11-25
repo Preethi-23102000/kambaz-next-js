@@ -54,10 +54,8 @@ export default function Dashboard() {
     try {
       let courses;
       if (showAllCourses) {
-        // Fetch ALL courses from the database
         courses = await client.fetchAllCourses();
       } else {
-        // Fetch only user's enrolled courses
         courses = await client.findMyCourses();
       }
       dispatch(setCourses(courses));
@@ -256,7 +254,6 @@ export default function Dashboard() {
         <div className="wd-dashboard-course">
           <Row xs={1} md={5} className="g-4">
             {!currentUser ? (
-              // When user is not logged in
               <Col className="text-center mt-5">
                 <h3>Please log in to view courses</h3>
                 <p className="text-muted">
@@ -264,7 +261,6 @@ export default function Dashboard() {
                 </p>
               </Col>
             ) : displayedCourses.length === 0 ? (
-              // When user is logged in but no courses to show
               <Col className="text-center mt-5">
                 <h3>No courses available</h3>
                 <p className="text-muted">
@@ -274,7 +270,6 @@ export default function Dashboard() {
                 </p>
               </Col>
             ) : (
-              // When there are courses to display
               displayedCourses.map((course: any) => (
                 <Col
                   key={course._id}
@@ -304,7 +299,6 @@ export default function Dashboard() {
                         </CardText>
                         <Button variant="primary">Go</Button>
 
-                        {/* Faculty Edit/Delete Buttons */}
                         {isFaculty && !showAllCourses && (
                           <>
                             <button
@@ -332,7 +326,6 @@ export default function Dashboard() {
                       </CardBody>
                     </Link>
 
-                    {/* Enrollment Buttons */}
                     {showAllCourses && currentUser.role !== "FACULTY" && (
                       <CardBody className="pt-0">
                         {isEnrolled(course._id) ? (

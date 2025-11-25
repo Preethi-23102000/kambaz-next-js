@@ -59,7 +59,6 @@ export default function AssignmentEditor() {
   );
   const isFaculty = currentUser && currentUser.role === "FACULTY";
 
-  // Single state for assignment data
   const [assignment, setAssignment] = useState<Assignment>({
     title: "New Assignment",
     course: cid,
@@ -84,7 +83,6 @@ export default function AssignmentEditor() {
   const [loading, setLoading] = useState(false);
   const [notFound, setNotFound] = useState(false);
 
-  // Fetch assignment if editing (aid !== "new")
   useEffect(() => {
     const fetchAssignment = async () => {
       if (aid && aid !== "new") {
@@ -110,7 +108,6 @@ export default function AssignmentEditor() {
   const handleSave = async () => {
     setLoading(true);
     try {
-      // Update date words before saving
       const updatedAssignment = {
         ...assignment,
         availableDateWords: formatDateWordsLocal(assignment.available),
@@ -118,13 +115,11 @@ export default function AssignmentEditor() {
       };
 
       if (aid === "new") {
-        // Create new assignment
         await client.createAssignmentsForCourse(
           cid as string,
           updatedAssignment
         );
       } else {
-        // Update existing assignment
         await client.updateAssignments(updatedAssignment);
       }
       router.push(`/Courses/${cid}/Assignments`);
@@ -140,7 +135,6 @@ export default function AssignmentEditor() {
     router.push(`/Courses/${cid}/Assignments`);
   };
 
-  // Loading state
   if (loading && aid !== "new") {
     return (
       <div className="container mt-5 text-center">
@@ -149,7 +143,6 @@ export default function AssignmentEditor() {
     );
   }
 
-  // If assignment not found
   if (notFound) {
     return (
       <div className="container mt-5">
@@ -161,19 +154,16 @@ export default function AssignmentEditor() {
     );
   }
 
-  // STUDENT VIEW - Read-only display
+  // STUDENT VIEW
   if (!isFaculty) {
     return (
       <div id="wd-assignment-view" className="container mt-4">
-        {/* Assignment Title */}
         <h2 className="mb-4">{assignment.title}</h2>
 
         <hr />
 
-        {/* Assignment Details Card */}
         <Card className="mb-4">
           <Card.Body>
-            {/* Description Section */}
             <div className="mb-4">
               <h5 className="text-muted mb-3">Description</h5>
               <div className="ps-3" style={{ whiteSpace: "pre-wrap" }}>
@@ -200,7 +190,6 @@ export default function AssignmentEditor() {
 
             <hr />
 
-            {/* Points */}
             <Row className="mb-3">
               <Col xs={4} className="text-end">
                 <strong>Points:</strong>
@@ -208,7 +197,6 @@ export default function AssignmentEditor() {
               <Col xs={8}>{assignment.points}</Col>
             </Row>
 
-            {/* Assignment Group */}
             <Row className="mb-3">
               <Col xs={4} className="text-end">
                 <strong>Assignment Group:</strong>
@@ -216,7 +204,6 @@ export default function AssignmentEditor() {
               <Col xs={8}>{assignment.assignmentGroup}</Col>
             </Row>
 
-            {/* Display Grade As */}
             <Row className="mb-3">
               <Col xs={4} className="text-end">
                 <strong>Display Grade as:</strong>
@@ -224,7 +211,6 @@ export default function AssignmentEditor() {
               <Col xs={8}>{assignment.displayGrade}</Col>
             </Row>
 
-            {/* Submission Type */}
             <Row className="mb-3">
               <Col xs={4} className="text-end">
                 <strong>Submission Type:</strong>
@@ -234,11 +220,9 @@ export default function AssignmentEditor() {
 
             <hr />
 
-            {/* Assignment Dates Section */}
             <div className="p-3 rounded">
               <h6 className="mb-3">Important Dates</h6>
 
-              {/* Due Date */}
               <Row className="mb-2">
                 <Col xs={4} className="text-end">
                   <strong>Due:</strong>
@@ -255,8 +239,6 @@ export default function AssignmentEditor() {
                   {" at 11:59pm"}
                 </Col>
               </Row>
-
-              {/* Available From */}
               <Row className="mb-2">
                 <Col xs={4} className="text-end">
                   <strong>Available from:</strong>
@@ -271,7 +253,6 @@ export default function AssignmentEditor() {
                 </Col>
               </Row>
 
-              {/* Until */}
               <Row className="mb-2">
                 <Col xs={4} className="text-end">
                   <strong>Until:</strong>
@@ -287,7 +268,6 @@ export default function AssignmentEditor() {
               </Row>
             </div>
 
-            {/* Assigned To */}
             <Row className="mt-3">
               <Col xs={4} className="text-end">
                 <strong>Assigned to:</strong>
@@ -297,7 +277,6 @@ export default function AssignmentEditor() {
           </Card.Body>
         </Card>
 
-        {/* Action Buttons for Students */}
         <div className="d-flex gap-2 mb-5">
           <Button variant="primary" size="lg">
             Submit Assignment
@@ -312,7 +291,7 @@ export default function AssignmentEditor() {
     );
   }
 
-  // FACULTY VIEW - Editable form
+  // FACULTY VIEW
   return (
     <div id="wd-assignments-editor">
       <FormGroup

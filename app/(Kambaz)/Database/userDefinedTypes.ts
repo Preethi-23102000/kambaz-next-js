@@ -1,8 +1,3 @@
-// Previously used 'any' while filtering through modules and assignments,
-// which caused TypeScript error and prevented deployment.
-// Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-// Updated to use a defined interface (e.g., Module or Assignment or Lesson) from userDefinedTypes
-
 export interface AssignmentDescription {
   summary: string;
   requirements: string[];

@@ -33,11 +33,6 @@ export default function Profile() {
     if (!currentUser) return redirect("/Account/Signin");
     setProfile(currentUser);
   };
-  // const signout = () => {
-  //   dispatch(setCurrentUser(null));
-  //   persistor.purge();
-  //   redirect("/Account/Signin");
-  // };
 
   const signout = async () => {
     await client.signout();

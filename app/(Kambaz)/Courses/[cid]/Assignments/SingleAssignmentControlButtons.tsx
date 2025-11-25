@@ -13,18 +13,6 @@ export default function SingleAssignmentControlButtons({
   const [showAlert, setShowAlert] = useState(false);
   return (
     <div className="float-end d-flex align-items-center gap-2 flex-wrap">
-      {/* <FaTrash
-        className="text-danger"
-        style={{ cursor: "pointer" }}
-        onClick={() => {
-          const confirmDelete = window.confirm(
-            "Are you sure you want to delete this assignment?"
-          );
-          if (confirmDelete) {
-            deleteAssignment(assignmentId);
-          }
-        }}
-      /> */}
       <Modal show={showAlert} onHide={() => setShowAlert(false)} centered>
         <Modal.Body>
           <Alert variant="warning" className="mb-0">

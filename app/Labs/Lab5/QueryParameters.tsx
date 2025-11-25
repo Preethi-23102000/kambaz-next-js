@@ -37,7 +37,6 @@ export default function QueryParameters() {
       >
         Substract {a} - {b}
       </a>
-      {/* create additional links to test multiply and divide. use IDs starting with wd-query-parameter- */}
       <a
         className="btn btn-primary me-2"
         id="wd-query-parameter-multiply"

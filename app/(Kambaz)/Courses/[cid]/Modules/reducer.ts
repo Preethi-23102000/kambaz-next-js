@@ -35,7 +35,6 @@ const modulesSlice = createSlice({
       state.modules = action.payload;
     },
 
-// --- NEW: lesson-level reducers ---
     addLesson: (state, { payload }: { payload: { moduleId: string; name: string } }) => {
       state.modules = state.modules.map((m: any) =>
         m._id === payload.moduleId
