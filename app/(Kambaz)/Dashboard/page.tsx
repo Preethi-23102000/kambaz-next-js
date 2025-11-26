@@ -86,7 +86,21 @@ export default function Dashboard() {
       image: course.image || "/images/reactjs.jpg",
     };
     const newCourse = await client.createCourse(courseToCreate);
-    dispatch(setCourses([...courses, newCourse]));
+
+    if (currentUser && currentUser._id) {
+      try {
+        const enrollment = await client.enrollIntoCourse(
+          currentUser._id,
+          newCourse._id
+        );
+        dispatch(addEnrollment(enrollment));
+      } catch (error) {
+        console.error("Error auto-enrolling faculty:", error);
+      }
+    }
+
+    await fetchCourses();
+    await fetchEnrollments();
   };
 
   const onDeleteCourse = async (courseId: string) => {
