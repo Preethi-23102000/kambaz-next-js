@@ -23,6 +23,7 @@ export interface Assignment {
 }
 
 export interface newAssignment {
+  _id?: string;
   title: string;
   course: string;
   modules: string;

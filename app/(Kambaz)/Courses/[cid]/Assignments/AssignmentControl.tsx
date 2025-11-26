@@ -4,6 +4,8 @@ import AssignmentSearchBar from "./AssignmentSearchBar";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import type { Assignment } from "../../../Database/userDefinedTypes";
+import * as client from "../../client";
+import { useRouter } from "next/navigation";
 
 export default function AssignmentControl({ cid }: { cid: string | string[] }) {
   const { currentUser } = useSelector(
@@ -11,6 +13,7 @@ export default function AssignmentControl({ cid }: { cid: string | string[] }) {
   );
   const isFaculty = currentUser && currentUser.role === "FACULTY";
   const courseId = Array.isArray(cid) ? cid[0] : cid;
+  const router = useRouter();
 
   const { assignments } = useSelector(
     (state: RootState) => state.assignmentsReducer
@@ -42,6 +45,68 @@ export default function AssignmentControl({ cid }: { cid: string | string[] }) {
 
     return `A${courseLastDigit}${newSequence}`;
   };
+
+  const handleCreateNewAssignment = async () => {
+    const newId = generateNewAssignmentId();
+
+    const today = () => {
+      const now = new Date();
+      return now.toISOString().split("T")[0];
+    };
+
+    const oneWeekFromToday = () => {
+      const now = new Date();
+      now.setDate(now.getDate() + 7);
+      return now.toISOString().split("T")[0];
+    };
+
+    const oneMonthFromToday = () => {
+      const now = new Date();
+      now.setDate(now.getDate() + 30);
+      return now.toISOString().split("T")[0];
+    };
+
+    const formatDateWordsLocal = (dateString: string) => {
+      const [year, month, day] = dateString.split("-");
+      const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+      return date.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      });
+    };
+
+    const newAssignment = {
+      _id: newId,
+      title: "New Assignment",
+      course: courseId,
+      modules: "Multiple Modules",
+      points: 100,
+      available: today(),
+      due: oneWeekFromToday(),
+      until: oneMonthFromToday(),
+      availableDateWords: formatDateWordsLocal(today()),
+      dueDateWords: formatDateWordsLocal(oneWeekFromToday()),
+      description: {
+        summary: "New assignment description",
+        requirements: [],
+        note: "",
+      },
+      assignmentGroup: "ASSIGNMENTS",
+      displayGrade: "Percentage",
+      submissionType: "Online",
+      assignedTo: "Everyone",
+    };
+
+    try {
+      await client.createAssignmentsForCourse(courseId, newAssignment);
+
+      router.push(`/Courses/${courseId}/Assignments/${newId}`);
+    } catch (error) {
+      console.error("Error creating assignment:", error);
+      alert("Failed to create assignment");
+    }
+  };
+
   return (
     <div
       id="wd-assignment-controls"
@@ -67,7 +132,7 @@ export default function AssignmentControl({ cid }: { cid: string | string[] }) {
             variant="danger"
             id="wd-add-assignment-btn"
             className="text-nowrap"
-            href={`/Courses/${courseId}/Assignments/${generateNewAssignmentId()}`}
+            onClick={handleCreateNewAssignment}
           >
             <FaPlus className="position-relative me-2 " />
             Assignment

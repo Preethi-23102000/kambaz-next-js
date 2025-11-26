@@ -33,6 +33,12 @@ export default function Assignments() {
   const courseAssignments = assignments.filter(
     (assignment: Assignment) => assignment.course === cid
   );
+  console.log(
+    "Raw assignment data:",
+    JSON.stringify(courseAssignments[0], null, 2)
+  );
+  console.log("First assignment _id:", courseAssignments[0]?._id);
+  console.log("Type of _id:", typeof courseAssignments[0]?._id);
 
   const fetchAssignments = async () => {
     const assignments = await client.findAssignmentsForCourse(cid as string);

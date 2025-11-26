@@ -13,11 +13,12 @@ import {
   Card,
 } from "react-bootstrap";
 import { RxCross2 } from "react-icons/rx";
-import type { newAssignment } from "../../../../Database/userDefinedTypes";
+import type { Assignment } from "../../../../Database/userDefinedTypes";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../../store";
+import { addAssignment } from "../reducer";
 import Link from "next/link";
 import * as client from "../../../client";
 
@@ -54,74 +55,81 @@ export default function AssignmentEditor() {
   const aid = Array.isArray(params.aid) ? params.aid[0] : params.aid || "";
 
   const router = useRouter();
+  const dispatch = useDispatch();
+
   const { currentUser } = useSelector(
     (state: RootState) => state.accountReducer
   );
   const isFaculty = currentUser && currentUser.role === "FACULTY";
 
-  const [assignment, setAssignment] = useState<newAssignment>({
-    title: "New Assignment",
-    course: cid,
-    modules: "Multiple Modules",
-    points: 100,
-    available: today(),
-    due: oneWeekFromToday(),
-    until: oneMonthFromToday(),
-    availableDateWords: formatDateWordsLocal(today()),
-    dueDateWords: formatDateWordsLocal(oneWeekFromToday()),
-    description: {
-      summary: "New assignment description",
-      requirements: [],
-      note: "",
-    },
-    assignmentGroup: "ASSIGNMENTS",
-    displayGrade: "Percentage",
-    submissionType: "Online",
-    assignedTo: "Everyone",
-  });
+  const { assignments } = useSelector(
+    (state: RootState) => state.assignmentsReducer
+  );
+
+  // Find existing assignment from Redux
+  const existingAssignment = assignments.find(
+    (assignment: Assignment) => assignment._id === aid
+  );
+
+  // State for assignment data
+  const [assignmentData, setAssignmentData] = useState<Assignment>(
+    existingAssignment || {
+      _id: aid as string,
+      title: "New Assignment",
+      course: cid as string,
+      modules: "Multiple Modules",
+      availableDateWords: formatDateWordsLocal(today()),
+      dueDateWords: formatDateWordsLocal(oneWeekFromToday()),
+      available: today(),
+      due: oneWeekFromToday(),
+      until: oneMonthFromToday(),
+      description: {
+        summary: "New assignment description",
+        requirements: [],
+        note: "",
+      },
+      assignmentGroup: "ASSIGNMENTS",
+      displayGrade: "Percentage",
+      submissionType: "Online",
+      assignedTo: "Everyone",
+      points: 100,
+    }
+  );
 
   const [loading, setLoading] = useState(false);
-  const [notFound, setNotFound] = useState(false);
 
+  // Fetch assignment from server if not in Redux
   useEffect(() => {
     const fetchAssignment = async () => {
-      if (aid && aid !== "new") {
+      if (aid && !existingAssignment) {
         setLoading(true);
         try {
           const data = await client.findAssignmentById(aid as string);
           if (data) {
-            setAssignment(data);
-          } else {
-            setNotFound(true);
+            setAssignmentData(data);
           }
         } catch (error) {
           console.error("Error fetching assignment:", error);
-          setNotFound(true);
+          // If fetch fails, use default values (for new assignments)
         } finally {
           setLoading(false);
         }
       }
     };
     fetchAssignment();
-  }, [aid]);
+  }, [aid, existingAssignment]);
 
   const handleSave = async () => {
     setLoading(true);
     try {
       const updatedAssignment = {
-        ...assignment,
-        availableDateWords: formatDateWordsLocal(assignment.available),
-        dueDateWords: formatDateWordsLocal(assignment.due),
+        ...assignmentData,
+        availableDateWords: formatDateWordsLocal(assignmentData.available),
+        dueDateWords: formatDateWordsLocal(assignmentData.due),
       };
 
-      if (aid === "new") {
-        await client.createAssignmentsForCourse(
-          cid as string,
-          updatedAssignment
-        );
-      } else {
-        await client.updateAssignments(updatedAssignment);
-      }
+      await client.updateAssignments(updatedAssignment);
+
       router.push(`/Courses/${cid}/Assignments`);
     } catch (error) {
       console.error("Error saving assignment:", error);
@@ -130,26 +138,14 @@ export default function AssignmentEditor() {
       setLoading(false);
     }
   };
-
   const handleCancel = () => {
     router.push(`/Courses/${cid}/Assignments`);
   };
 
-  if (loading && aid !== "new") {
+  if (loading) {
     return (
       <div className="container mt-5 text-center">
         <h3>Loading assignment...</h3>
-      </div>
-    );
-  }
-
-  if (notFound) {
-    return (
-      <div className="container mt-5">
-        <h3>Assignment not found</h3>
-        <Link href={`/Courses/${cid}/Assignments`}>
-          <Button variant="primary">Back to Assignments</Button>
-        </Link>
       </div>
     );
   }
@@ -158,7 +154,7 @@ export default function AssignmentEditor() {
   if (!isFaculty) {
     return (
       <div id="wd-assignment-view" className="container mt-4">
-        <h2 className="mb-4">{assignment.title}</h2>
+        <h2 className="mb-4">{assignmentData.title}</h2>
 
         <hr />
 
@@ -167,22 +163,22 @@ export default function AssignmentEditor() {
             <div className="mb-4">
               <h5 className="text-muted mb-3">Description</h5>
               <div className="ps-3" style={{ whiteSpace: "pre-wrap" }}>
-                {assignment.description.summary}
-                {assignment.description.requirements.length > 0 && (
+                {assignmentData.description.summary}
+                {assignmentData.description.requirements.length > 0 && (
                   <>
                     {"\n\n"}
                     <strong>Requirements:</strong>
-                    {assignment.description.requirements.map(
+                    {assignmentData.description.requirements.map(
                       (req: string, index: number) => (
                         <div key={index}>• {req}</div>
                       )
                     )}
                   </>
                 )}
-                {assignment.description.note && (
+                {assignmentData.description.note && (
                   <>
                     {"\n\n"}
-                    <em>{assignment.description.note}</em>
+                    <em>{assignmentData.description.note}</em>
                   </>
                 )}
               </div>
@@ -194,28 +190,28 @@ export default function AssignmentEditor() {
               <Col xs={4} className="text-end">
                 <strong>Points:</strong>
               </Col>
-              <Col xs={8}>{assignment.points}</Col>
+              <Col xs={8}>{assignmentData.points}</Col>
             </Row>
 
             <Row className="mb-3">
               <Col xs={4} className="text-end">
                 <strong>Assignment Group:</strong>
               </Col>
-              <Col xs={8}>{assignment.assignmentGroup}</Col>
+              <Col xs={8}>{assignmentData.assignmentGroup}</Col>
             </Row>
 
             <Row className="mb-3">
               <Col xs={4} className="text-end">
                 <strong>Display Grade as:</strong>
               </Col>
-              <Col xs={8}>{assignment.displayGrade}</Col>
+              <Col xs={8}>{assignmentData.displayGrade}</Col>
             </Row>
 
             <Row className="mb-3">
               <Col xs={4} className="text-end">
                 <strong>Submission Type:</strong>
               </Col>
-              <Col xs={8}>{assignment.submissionType}</Col>
+              <Col xs={8}>{assignmentData.submissionType}</Col>
             </Row>
 
             <hr />
@@ -229,7 +225,7 @@ export default function AssignmentEditor() {
                 </Col>
                 <Col xs={8}>
                   <span>
-                    {new Date(assignment.due).toLocaleDateString("en-US", {
+                    {new Date(assignmentData.due).toLocaleDateString("en-US", {
                       weekday: "long",
                       year: "numeric",
                       month: "long",
@@ -244,12 +240,15 @@ export default function AssignmentEditor() {
                   <strong>Available from:</strong>
                 </Col>
                 <Col xs={8}>
-                  {new Date(assignment.available).toLocaleDateString("en-US", {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
+                  {new Date(assignmentData.available).toLocaleDateString(
+                    "en-US",
+                    {
+                      weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    }
+                  )}
                 </Col>
               </Row>
 
@@ -258,7 +257,7 @@ export default function AssignmentEditor() {
                   <strong>Until:</strong>
                 </Col>
                 <Col xs={8}>
-                  {new Date(assignment.until).toLocaleDateString("en-US", {
+                  {new Date(assignmentData.until).toLocaleDateString("en-US", {
                     weekday: "long",
                     year: "numeric",
                     month: "long",
@@ -272,7 +271,7 @@ export default function AssignmentEditor() {
               <Col xs={4} className="text-end">
                 <strong>Assigned to:</strong>
               </Col>
-              <Col xs={8}>{assignment.assignedTo}</Col>
+              <Col xs={8}>{assignmentData.assignedTo}</Col>
             </Row>
           </Card.Body>
         </Card>
@@ -300,9 +299,9 @@ export default function AssignmentEditor() {
       >
         <FormLabel>Assignment Name</FormLabel>
         <FormControl
-          value={assignment.title}
+          value={assignmentData.title}
           onChange={(e) =>
-            setAssignment({ ...assignment, title: e.target.value })
+            setAssignmentData({ ...assignmentData, title: e.target.value })
           }
           placeholder="Enter assignment name"
         />
@@ -312,22 +311,22 @@ export default function AssignmentEditor() {
         as="textarea"
         rows={10}
         value={
-          assignment.description.summary +
-          (assignment.description.requirements.length > 0
+          assignmentData.description.summary +
+          (assignmentData.description.requirements.length > 0
             ? "\n\n" +
-              assignment.description.requirements
+              assignmentData.description.requirements
                 .map((r: string) => `- ${r}`)
                 .join("\n")
             : "") +
-          (assignment.description.note
-            ? "\n\n" + assignment.description.note
+          (assignmentData.description.note
+            ? "\n\n" + assignmentData.description.note
             : "")
         }
         onChange={(e) => {
-          setAssignment({
-            ...assignment,
+          setAssignmentData({
+            ...assignmentData,
             description: {
-              ...assignment.description,
+              ...assignmentData.description,
               summary: e.target.value,
             },
           });
@@ -348,10 +347,10 @@ export default function AssignmentEditor() {
             <FormControl
               type="number"
               className="margin-bottom-15 margin-top-15"
-              value={assignment.points}
+              value={assignmentData.points}
               onChange={(e) =>
-                setAssignment({
-                  ...assignment,
+                setAssignmentData({
+                  ...assignmentData,
                   points: parseInt(e.target.value) || 0,
                 })
               }
@@ -371,10 +370,10 @@ export default function AssignmentEditor() {
 
           <Col xs={8} className="margin-bottom-15 margin-top-15">
             <FormSelect
-              value={assignment.assignmentGroup}
+              value={assignmentData.assignmentGroup}
               onChange={(e) =>
-                setAssignment({
-                  ...assignment,
+                setAssignmentData({
+                  ...assignmentData,
                   assignmentGroup: e.target.value,
                 })
               }
@@ -402,10 +401,10 @@ export default function AssignmentEditor() {
 
           <Col xs={8} className="margin-bottom-15 margin-top-15">
             <FormSelect
-              value={assignment.displayGrade}
+              value={assignmentData.displayGrade}
               onChange={(e) =>
-                setAssignment({
-                  ...assignment,
+                setAssignmentData({
+                  ...assignmentData,
                   displayGrade: e.target.value,
                 })
               }
@@ -433,10 +432,10 @@ export default function AssignmentEditor() {
             <div className="border-round">
               <FormSelect
                 className="margin-bottom-15 margin-top-15"
-                value={assignment.submissionType}
+                value={assignmentData.submissionType}
                 onChange={(e) =>
-                  setAssignment({
-                    ...assignment,
+                  setAssignmentData({
+                    ...assignmentData,
                     submissionType: e.target.value,
                   })
                 }
@@ -459,7 +458,6 @@ export default function AssignmentEditor() {
               <Form.Check
                 type="checkbox"
                 label="Website URL"
-                checked
                 className="margin-bottom-15 margin-top-15"
               />
               <Form.Check
@@ -496,7 +494,7 @@ export default function AssignmentEditor() {
               <b>Assign to</b>
               <div className="border-round margin-bottom-15">
                 <span className="solid-grey">
-                  {assignment.assignedTo}
+                  {assignmentData.assignedTo}
                   <RxCross2 className="margin-left-15 justify-content-end" />
                 </span>
               </div>
@@ -506,10 +504,10 @@ export default function AssignmentEditor() {
                   <div className="margin-bottom-15">
                     <FormControl
                       type="date"
-                      value={assignment.due}
+                      value={assignmentData.due}
                       onChange={(e) =>
-                        setAssignment({
-                          ...assignment,
+                        setAssignmentData({
+                          ...assignmentData,
                           due: e.target.value,
                         })
                       }
@@ -524,10 +522,10 @@ export default function AssignmentEditor() {
                   <div className="margin-bottom-15">
                     <FormControl
                       type="date"
-                      value={assignment.available}
+                      value={assignmentData.available}
                       onChange={(e) =>
-                        setAssignment({
-                          ...assignment,
+                        setAssignmentData({
+                          ...assignmentData,
                           available: e.target.value,
                         })
                       }
@@ -539,10 +537,10 @@ export default function AssignmentEditor() {
                   <div className="margin-bottom-15">
                     <FormControl
                       type="date"
-                      value={assignment.until}
+                      value={assignmentData.until}
                       onChange={(e) =>
-                        setAssignment({
-                          ...assignment,
+                        setAssignmentData({
+                          ...assignmentData,
                           until: e.target.value,
                         })
                       }
