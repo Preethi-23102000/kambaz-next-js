@@ -138,7 +138,9 @@ export default function Dashboard() {
     }
   };
 
-  const displayedCourses = courses;
+  const displayedCourses = courses.filter(
+    (course: any) => course !== null && course !== undefined
+  );
 
   const handleToggle = () => {
     setShowAllCourses(!showAllCourses);
