@@ -1,6 +1,5 @@
 "use client";
 import { useParams } from "next/navigation";
-import * as db from "../../../Database";
 import Link from "next/link";
 import AssignmentControl from "./AssignmentControl";
 import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
